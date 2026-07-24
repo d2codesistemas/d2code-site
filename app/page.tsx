@@ -107,7 +107,10 @@ export default function Home() {
         <div className="container hero-layout">
           <div className="hero-copy">
             <p className="kicker">D2_CODE // SOFTWARE &amp; AUTOMAÇÃO</p>
-            <h1>Software sob medida para <span>operações que não podem parar.</span></h1>
+            <h1>
+              Software sob medida<span className="desktop-break"><br /></span>{" "}
+              para <span>operações que<span className="desktop-break"><br /></span>{" "}não podem parar.</span>
+            </h1>
             <p className="lead">Desenvolvemos sistemas, integrações e automações para conectar processos, equipamentos e dados — da gestão ao chão de fábrica.</p>
             <div className="mobile-signature">
               <Logo />
@@ -135,7 +138,10 @@ export default function Home() {
           </div>
         </div>
         <div className="ticker" aria-label="Áreas de atuação">
-          <div>SOFTWARE SOB MEDIDA ◆ AUTOMAÇÃO INDUSTRIAL ◆ RASTREABILIDADE ◆ INSPEÇÃO &amp; QUALIDADE ◆ INTEGRAÇÃO COM EQUIPAMENTOS ◆ MODERNIZAÇÃO DE SISTEMAS ◆</div>
+          <div className="ticker-track">
+            <span>SOFTWARE SOB MEDIDA ◆ AUTOMAÇÃO INDUSTRIAL ◆ RASTREABILIDADE ◆ INSPEÇÃO &amp; QUALIDADE ◆ INTEGRAÇÃO COM EQUIPAMENTOS ◆ MODERNIZAÇÃO DE SISTEMAS ◆</span>
+            <span aria-hidden="true">SOFTWARE SOB MEDIDA ◆ AUTOMAÇÃO INDUSTRIAL ◆ RASTREABILIDADE ◆ INSPEÇÃO &amp; QUALIDADE ◆ INTEGRAÇÃO COM EQUIPAMENTOS ◆ MODERNIZAÇÃO DE SISTEMAS ◆</span>
+          </div>
         </div>
       </section>
 
@@ -171,7 +177,7 @@ export default function Home() {
           <div className="service-grid">
             {services.map((service) => (
               <article key={service[0]}>
-                <b>{service[0]}</b><h3>{service[1]}</h3><p>{service[2]}</p><i aria-hidden="true">↗</i>
+                <b>{service[0]}</b><h3>{service[1]}</h3><p>{service[2]}</p>
               </article>
             ))}
           </div>
@@ -229,7 +235,7 @@ export default function Home() {
               <b>2025<small>FUNDAÇÃO</small></b>
               <b>ATIBAIA · SP<small>BASE</small></b>
               <b>SOB MEDIDA<small>MODELO</small></b>
-              <b>EXPERIÊNCIA INDUSTRIAL<small>ESPECIALIDADE</small></b>
+              <b>OPERAÇÕES CRÍTICAS<small>ESPECIALIDADE</small></b>
             </div>
           </div>
         </div>
@@ -272,7 +278,7 @@ export default function Home() {
           </div>
           <address className="contact-details">
             <strong>Diego Carvalho</strong>
-            <span>Desenvolvimento e soluções técnicas</span>
+            <span>Fundador e responsável técnico</span>
             <a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a>
             <a href={WHATSAPP} target="_blank" rel="noreferrer">(11) 95026-3057</a>
           </address>

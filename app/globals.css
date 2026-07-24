@@ -166,3 +166,52 @@ button{font:inherit;color:inherit}
   .privacy-page{padding:36px 0 60px}
   .privacy-header{margin-bottom:50px}
 }
+
+/* Focused layout corrections: hero rhythm, continuous ticker and tighter sections. */
+section[id]{scroll-margin-top:24px}
+.hero-layout{grid-template-columns:1.18fr .82fr;gap:60px}
+.hero h1{max-width:760px;font-size:clamp(52px,4.8vw,70px)}
+.stamp{right:10px;bottom:-22px;z-index:2}
+
+.ticker{max-width:100%;overflow:hidden}
+.ticker .ticker-track{
+  display:flex;
+  flex:none;
+  width:max-content;
+  min-width:max-content;
+  animation:ticker-loop 32s linear infinite;
+  will-change:transform;
+}
+.ticker-track span{display:block;flex:none;padding-right:42px}
+@keyframes ticker-loop{
+  from{transform:translate3d(0,0,0)}
+  to{transform:translate3d(-50%,0,0)}
+}
+
+.service-grid article{padding-right:28px}
+.proposition,.operation,.technologies,.process-section{padding-top:88px;padding-bottom:88px}
+.proposition .value-cards,.operation .modules,.technologies .tech-grid,.process-section .steps{margin-top:52px}
+.cta{padding:88px 0}
+
+.footer-top p{font-size:13px}
+.footer-top>div{font-size:12px}
+.footer-bottom{font-size:11px;line-height:1.7}
+
+@media(max-width:900px){
+  .desktop-break{display:none}
+  .hero-layout{grid-template-columns:1fr;gap:0}
+  section[id]{scroll-margin-top:84px}
+  .proposition,.operation,.technologies,.process-section{padding-top:82px;padding-bottom:82px}
+  .cta{padding:82px 0}
+}
+
+@media(max-width:580px){
+  .hero h1{font-size:48px}
+  .proposition,.operation,.technologies,.process-section{padding-top:76px;padding-bottom:76px}
+  .proposition .value-cards,.operation .modules,.technologies .tech-grid,.process-section .steps{margin-top:42px}
+  .cta{padding:76px 0}
+  .stamp{right:6px;bottom:-18px}
+  .footer-top p{font-size:12px}
+  .footer-top>div{font-size:11px}
+  .footer-bottom{font-size:11px}
+}
