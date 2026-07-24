@@ -7,6 +7,9 @@ export const metadata: Metadata = {
   description:
     "Sistemas, integrações e automações sob medida para transformar desafios reais em soluções confiáveis.",
   metadataBase: new URL("https://d2code.com.br"),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "D2 Code | Software sob medida",
     description: "Tecnologia feita para o seu negócio avançar.",
@@ -24,9 +27,34 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const organizationData = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "D2 Code Sistemas",
+    alternateName: "D2 Code",
+    url: "https://d2code.com.br",
+    logo: "https://d2code.com.br/d2code-logo.png",
+    foundingDate: "2025",
+    email: "diego.carvalho@d2code.com.br",
+    telephone: "+55 11 95026-3057",
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Atibaia",
+      addressRegion: "SP",
+      addressCountry: "BR",
+    },
+    sameAs: ["https://www.linkedin.com/company/d2code"],
+  };
+
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+      <body>
+        {children}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}
+        />
+      </body>
       <Script id="microsoft-clarity" strategy="afterInteractive">
         {`
           (function(c,l,a,r,i,t,y){
