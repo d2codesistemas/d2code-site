@@ -14,3 +14,7 @@
 .value-cards h3{margin:3px 0 9px;font-size:16px}
 .value-cards p{margin:0}
 @media(max-width:580px){.value-cards article{min-height:0}}
+.btn.booking{background:var(--orange);border-color:var(--orange)}
+.btn.booking:hover{background:#bd5937;border-color:#bd5937}
+@media(max-width:1050px){.contact-options{flex-wrap:wrap}.contact-card{min-width:360px}}
+@media(max-width:680px){.contact-options .btn{width:100%}.contact-card{min-width:0}}
