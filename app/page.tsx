@@ -2,12 +2,12 @@
 import { useState } from "react";
 
 const services = [
-  ["01", "Sistemas industriais sob medida", "Aplicações desenhadas para o fluxo real da sua operação."],
-  ["02", "Integrações & middleware", "Sistemas, equipamentos e dados conversando sem ruído."],
-  ["03", "Automação operacional", "Menos trabalho manual, retrabalho e pontos de falha."],
-  ["04", "Rastreabilidade & serialização", "Histórico, precisão e conformidade de ponta a ponta."],
-  ["05", "Integração com equipamentos", "Leitores, câmeras, impressoras e dispositivos industriais."],
-  ["06", "Aplicações desktop & serviços", "Soluções Windows preparadas para ambientes críticos."],
+  ["01", "Sistemas sob medida", "Aplicações web, desktop e serviços desenhados para o seu negócio."],
+  ["02", "Integrações & APIs", "Sistemas, plataformas, equipamentos e dados trabalhando em conjunto."],
+  ["03", "Automação de processos", "Menos tarefas manuais, retrabalho e pontos de falha na rotina."],
+  ["04", "Portais & ferramentas internas", "Experiências simples para organizar fluxos, equipes e informações."],
+  ["05", "Dados & rastreabilidade", "Informação confiável para acompanhar, decidir e comprovar."],
+  ["06", "Evolução de sistemas", "Modernização e continuidade para soluções que já fazem parte da empresa."],
 ];
 
 const steps = [
@@ -36,29 +36,29 @@ export default function Home() {
     <section className="hero" id="inicio">
       <div className="container hero-layout">
         <div className="hero-copy">
-          <p className="kicker">D2_CODE // SOFTWARE INDUSTRIAL</p>
-          <h1>Software conectado à <span>realidade da operação.</span></h1>
-          <p className="lead">Sistemas, integrações e automações sob medida para transformar processos complexos em operações mais estáveis, rastreáveis e eficientes.</p>
+          <p className="kicker">D2_CODE // SOFTWARE SOB MEDIDA</p>
+          <h1>Tecnologia feita para <span>o seu negócio avançar.</span></h1>
+          <p className="lead">Criamos sistemas, integrações e automações sob medida para transformar desafios reais em soluções simples, confiáveis e prontas para crescer.</p>
           <div className="actions"><a className="btn" href="#contato">INICIAR CONVERSA <b>→</b></a><a className="plain" href="#servicos">VER SOLUÇÕES ↓</a></div>
           <div className="status"><span>● SISTEMA ONLINE</span><span>ATIBAIA_SP · BRASIL</span></div>
         </div>
         <div className="hero-brand">
           <div className="window">
             <div className="titlebar"><span>D2CODE.EXE</span><i>_ □ ×</i></div>
-            <div className="window-body"><Logo /><div className="boot"><p>C:\D2CODE&gt; CONNECT_OPERATION</p><p>LOADING INDUSTRIAL MODULES...</p><p className="ok">[ OK ] READY TO BUILD_</p></div></div>
+            <div className="window-body"><Logo /><div className="boot"><p>C:\D2CODE&gt; START_PROJECT</p><p>CONNECTING IDEAS, SYSTEMS &amp; PEOPLE...</p><p className="ok">[ OK ] READY TO BUILD_</p></div></div>
           </div>
           <div className="stamp">DESDE<br /><strong>2025</strong></div>
         </div>
       </div>
-      <div className="ticker"><div>DESENVOLVIMENTO SOB MEDIDA ◆ INTEGRAÇÃO INDUSTRIAL ◆ RASTREABILIDADE ◆ AUTOMAÇÃO DE PROCESSOS ◆ SOFTWARE QUE FUNCIONA NA VIDA REAL ◆</div></div>
+      <div className="ticker"><div>DESENVOLVIMENTO SOB MEDIDA ◆ APLICAÇÕES WEB &amp; DESKTOP ◆ INTEGRAÇÕES &amp; APIs ◆ AUTOMAÇÃO DE PROCESSOS ◆ SOFTWARE QUE FUNCIONA NA VIDA REAL ◆</div></div>
     </section>
 
     <section className="section proposition">
       <div className="container">
         <div className="section-label">01 / NOSSA PROPOSTA</div>
-        <div className="big-copy"><h2>Tecnologia que se adapta à sua operação.<br /><span>Não o contrário.</span></h2><p>Entramos onde soluções prontas param. Entendemos o processo, conectamos o que já existe e construímos exatamente o que a operação precisa para avançar.</p></div>
+        <div className="big-copy"><h2>Tecnologia que se adapta ao seu negócio.<br /><span>Não o contrário.</span></h2><p>Entramos onde soluções prontas param. Entendemos o contexto, conectamos o que já existe e construímos exatamente o que sua empresa precisa para avançar.</p></div>
         <div className="value-cards">
-          {[["PROCESSO","Feito para a rotina, as restrições e os objetivos reais da sua equipe."],["INTEGRAÇÃO","Software, dispositivos e sistemas no mesmo fluxo de informação."],["ESTABILIDADE","Arquitetura pensada para ambientes onde parar não é uma opção."]].map((v,i)=><article key={v[0]}><span>0{i+1}</span><h3>{v[0]}</h3><p>{v[1]}</p></article>)}
+          {[["ENTENDIMENTO","Começamos pelas pessoas, pelos objetivos e pela realidade do processo."],["CONEXÃO","Software, plataformas e dados no mesmo fluxo de informação."],["CONFIANÇA","Soluções claras, sustentáveis e preparadas para evoluir com a empresa."]].map((v,i)=><article key={v[0]}><span>0{i+1}</span><div><h3>{v[0]}</h3><p>{v[1]}</p></div></article>)}
         </div>
       </div>
     </section>
@@ -74,17 +74,17 @@ export default function Home() {
     <section className="section operation" id="atuacao">
       <div className="container">
         <div className="section-label">03 / ONDE ATUAMOS</div>
-        <h2>Software para os pontos críticos da cadeia operacional.</h2>
+        <h2>Soluções para diferentes desafios e contextos de negócio.</h2>
         <div className="modules">
-          {[["PRD","PRODUÇÃO","Fluxos produtivos, apontamentos e controle operacional."],["LOG","LOGÍSTICA","Movimentação, leitura, identificação e expedição."],["QLD","QUALIDADE","Rastreabilidade, registros e evidências do processo."],["INT","INTEGRAÇÃO","Sistemas legados, ERPs, APIs e equipamentos."]].map(x=><article key={x[0]}><div className="module-title"><span>{x[0]}</span><i>×</i></div><div><h3>{x[1]}</h3><p>{x[2]}</p></div><small>STATUS: READY</small></article>)}
+          {[["GES","GESTÃO","Ferramentas internas, fluxos de aprovação e visibilidade para decidir."],["INT","INTEGRAÇÃO","ERPs, plataformas, APIs, sistemas legados e equipamentos."],["OPS","OPERAÇÕES","Automação, controle, rastreabilidade e redução de tarefas manuais."],["IND","INDÚSTRIA","Soluções robustas para produção, logística, qualidade e chão de fábrica."]].map(x=><article key={x[0]}><div className="module-title"><span>{x[0]}</span><i>×</i></div><div><h3>{x[1]}</h3><p>{x[2]}</p></div><small>STATUS: READY</small></article>)}
         </div>
       </div>
     </section>
 
     <section className="section about" id="sobre">
       <div className="container about-layout">
-        <div className="poster"><Logo /><div className="poster-lines">DESIGN / DEVELOPMENT<br />INDUSTRIAL SYSTEMS<br />ATIBAIA — SP</div></div>
-        <div className="about-copy"><div className="section-label inverse">04 / SOBRE A D2 CODE</div><h2>Experiência técnica.<br /><span>Visão de operação.</span></h2><p>A D2 Code é uma empresa de Atibaia especializada em software para ambientes industriais e produtivos. Criamos soluções que conversam com equipamentos, sistemas e processos já existentes, respeitando a realidade de cada cliente.</p><p>Nosso foco é entregar tecnologia confiável, compreensível e útil no dia a dia — da primeira conversa à solução funcionando.</p><div className="facts"><b>2025<small>FUNDAÇÃO</small></b><b>ATIBAIA · SP<small>BASE</small></b><b>SOB MEDIDA<small>MODELO</small></b></div></div>
+        <div className="poster"><Logo /><div className="poster-lines">DESIGN / DEVELOPMENT<br />CUSTOM SOFTWARE<br />ATIBAIA — SP</div></div>
+        <div className="about-copy"><div className="section-label inverse">04 / SOBRE A D2 CODE</div><h2>Experiência técnica.<br /><span>Visão de negócio.</span></h2><p>A D2 Code é uma empresa de Atibaia que cria software sob medida para empresas. Desenvolvemos sistemas, integrações e automações que respeitam a realidade de cada cliente e resolvem problemas que ferramentas genéricas não alcançam.</p><p>Nossa experiência em ambientes industriais e operações críticas reforça um compromisso que vale para todo projeto: entregar tecnologia confiável, compreensível e útil no dia a dia.</p><div className="facts"><b>2025<small>FUNDAÇÃO</small></b><b>ATIBAIA · SP<small>BASE</small></b><b>SOB MEDIDA<small>MODELO</small></b></div></div>
       </div>
     </section>
 
@@ -92,8 +92,8 @@ export default function Home() {
       <div className="container"><div className="section-label">05 / COMO TRABALHAMOS</div><h2>Do diagnóstico à entrada em operação.</h2><div className="steps">{steps.map(s=><article key={s[0]}><b>{s[0]}</b><div className="step-line" /><h3>{s[1]}</h3><p>{s[2]}</p></article>)}</div></div>
     </section>
 
-    <section className="cta" id="contato"><div className="container"><p className="kicker">NEW_PROJECT.D2C</p><h2>Tem um processo travando a operação?</h2><p>Conte o desafio. A gente transforma complexidade em software que funciona.</p><div className="contact-options"><a className="btn light" href="https://wa.me/5511950263057?text=Olá%2C%20Diego!%20Gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa." target="_blank" rel="noreferrer">CONVERSAR NO WHATSAPP <b>→</b></a><a className="contact-card" href="mailto:diego.carvalho@d2code.com.br"><small>E-MAIL</small><strong>diego.carvalho@d2code.com.br</strong><span>↗</span></a></div></div></section>
+    <section className="cta" id="contato"><div className="container"><p className="kicker">NEW_PROJECT.D2C</p><h2>Existe um jeito melhor de fazer?</h2><p>Conte o desafio. A gente transforma complexidade em software que funciona.</p><div className="contact-options"><a className="btn light" href="https://wa.me/5511950263057?text=Olá%2C%20Diego!%20Gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa." target="_blank" rel="noreferrer">CONVERSAR NO WHATSAPP <b>→</b></a><a className="contact-card" href="mailto:diego.carvalho@d2code.com.br"><small>E-MAIL</small><strong>diego.carvalho@d2code.com.br</strong><span>↗</span></a></div></div></section>
 
-    <footer><div className="container footer-top"><Logo compact /><p>SOFTWARE INDUSTRIAL CONECTADO<br />À REALIDADE DA OPERAÇÃO.</p><div><a href="mailto:diego.carvalho@d2code.com.br">E-MAIL ↗</a><a href="https://wa.me/5511950263057" target="_blank" rel="noreferrer">WHATSAPP ↗</a><a href="https://www.linkedin.com/company/d2code">LINKEDIN ↗</a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span><span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a> · <a href="tel:+5511950263057">(11) 95026-3057</a></span><a href="#inicio">VOLTAR AO TOPO ↑</a></div></footer>
+    <footer><div className="container footer-top"><Logo compact /><p>SOFTWARE SOB MEDIDA<br />PARA DESAFIOS REAIS.</p><div><a href="mailto:diego.carvalho@d2code.com.br">E-MAIL ↗</a><a href="https://wa.me/5511950263057" target="_blank" rel="noreferrer">WHATSAPP ↗</a><a href="https://www.linkedin.com/company/d2code">LINKEDIN ↗</a></div></div><div className="container footer-bottom"><span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span><span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a> · <a href="tel:+5511950263057">(11) 95026-3057</a></span><a href="#inicio">VOLTAR AO TOPO ↑</a></div></footer>
   </main>;
 }
