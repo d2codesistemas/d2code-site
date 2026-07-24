@@ -39,6 +39,7 @@ export default function Home() {
           <p className="kicker">D2_CODE // SOFTWARE SOB MEDIDA</p>
           <h1>Tecnologia feita para <span>o seu negócio avançar.</span></h1>
           <p className="lead">Criamos sistemas, integrações e automações sob medida para transformar desafios reais em soluções simples, confiáveis e prontas para crescer.</p>
+          <div className="mobile-signature"><Logo /><p><strong>D2 CODE</strong><span>SISTEMAS SOB MEDIDA<br />ATIBAIA · SP</span></p></div>
           <div className="actions"><a className="btn" href="#contato">INICIAR CONVERSA <b>→</b></a><a className="plain" href="#servicos">VER SOLUÇÕES ↓</a></div>
           <div className="status"><span>● SISTEMA ONLINE</span><span>ATIBAIA_SP · BRASIL</span></div>
         </div>
@@ -56,7 +57,7 @@ export default function Home() {
     <section className="section proposition">
       <div className="container">
         <div className="section-label">01 / NOSSA PROPOSTA</div>
-        <div className="big-copy"><h2>Tecnologia que se adapta ao seu negócio.<br /><span>Não o contrário.</span></h2><p>Entramos onde soluções prontas param. Entendemos o contexto, conectamos o que já existe e construímos exatamente o que sua empresa precisa para avançar.</p></div>
+        <div className="big-copy"><h2>Não vendemos uma caixa fechada.<br /><span>Construímos o encaixe certo.</span></h2><p>Cada projeto começa pelo desafio, não pela tecnologia. Entendemos o contexto, conectamos o que já existe e criamos uma solução que faça sentido para sua empresa.</p></div>
         <div className="value-cards">
           {[["ENTENDIMENTO","Começamos pelas pessoas, pelos objetivos e pela realidade do processo."],["CONEXÃO","Software, plataformas e dados no mesmo fluxo de informação."],["CONFIANÇA","Soluções claras, sustentáveis e preparadas para evoluir com a empresa."]].map((v,i)=><article key={v[0]}><span>0{i+1}</span><div><h3>{v[0]}</h3><p>{v[1]}</p></div></article>)}
         </div>
