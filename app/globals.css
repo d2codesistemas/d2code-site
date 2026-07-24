@@ -63,3 +63,22 @@ header nav{font-size:12px;gap:28px}
   .mobile-signature span{color:var(--muted)}
   .hero-layout{padding-top:58px}
 }
+
+/* Stronger sequence markers and a visually balanced footer. */
+.service-grid article{padding-left:68px}
+.service-grid b{left:20px;top:22px;width:30px;height:30px;display:grid;place-items:center;border-radius:50%;background:#f6ede7;font-size:12px}
+.steps b{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#f6ede7;font-size:12px}
+.step-line{margin-top:16px}
+.footer-top{grid-template-columns:1fr auto 1fr;align-items:center}
+.footer-top>p{margin:0;text-align:center}
+.footer-top>div{justify-self:end}
+
+@media(max-width:900px){
+  .footer-top{grid-template-columns:1fr 1fr}
+  .footer-top>div{justify-self:end}
+}
+@media(max-width:580px){
+  .service-grid article{padding-left:66px}
+  .footer-top{grid-template-columns:auto 1fr;align-items:center}
+  .footer-top>div{grid-column:1/-1;justify-self:start}
+}
