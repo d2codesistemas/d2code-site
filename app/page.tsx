@@ -9,19 +9,19 @@ const BOOKINGS =
   "https://outlook.office.com/book/D2Code@d2codesistemas.com.br/?ismsaljsauthenabled";
 
 const services = [
-  ["01", "Sistemas sob medida", "Aplicações web, desktop e serviços desenvolvidos para a realidade do seu negócio."],
-  ["02", "Integrações industriais", "Câmeras, leitores, impressoras, CLPs, RFID, ERPs, APIs e bancos de dados trabalhando no mesmo fluxo."],
-  ["03", "Automação de processos", "Menos tarefas manuais, menos retrabalho e mais controle sobre a operação."],
-  ["04", "Inspeção & qualidade", "Validação automática, leitura de códigos, visão computacional e bloqueio de falhas no processo."],
-  ["05", "Dados & rastreabilidade", "Controle de lotes, seriais, produção, movimentações e histórico operacional."],
-  ["06", "Evolução de sistemas", "Modernização e continuidade para soluções que já fazem parte da empresa."],
+  { number: "01", id: "sistemas-sob-medida", title: "Sistemas sob medida", description: "Aplicações web, desktop e serviços desenvolvidos para a realidade do seu negócio." },
+  { number: "02", id: "integracoes-industriais", title: "Integrações industriais", description: "Câmeras, leitores, impressoras, CLPs, RFID, ERPs, APIs e bancos de dados trabalhando no mesmo fluxo." },
+  { number: "03", id: "automacao-processos", title: "Automação de processos", description: "Menos tarefas manuais, menos retrabalho e mais controle sobre a operação." },
+  { number: "04", id: "inspecao-qualidade", title: "Inspeção & qualidade", description: "Validação automática, leitura de códigos, visão computacional e bloqueio de falhas no processo." },
+  { number: "05", id: "dados-rastreabilidade", title: "Dados & rastreabilidade", description: "Controle de lotes, seriais, produção, movimentações e histórico operacional." },
+  { number: "06", id: "evolucao-sistemas", title: "Evolução de sistemas", description: "Modernização e continuidade para soluções que já fazem parte da empresa." },
 ];
 
 const operationAreas = [
-  ["GES", "GESTÃO E PROCESSOS", "Sistemas internos, aprovações, indicadores e controle operacional."],
-  ["INT", "INTEGRAÇÃO DE SISTEMAS", "ERPs, APIs, bancos de dados e sistemas legados conectados."],
-  ["AUT", "AUTOMAÇÃO INDUSTRIAL", "Equipamentos, produção, impressão, leitura e controle de linha."],
-  ["TRC", "RASTREABILIDADE E QUALIDADE", "Controle por lote, serial, inspeção, rejeição e histórico completo."],
+  { code: "GES", title: "GESTÃO E PROCESSOS", description: "Sistemas internos, aprovações, indicadores e controle operacional.", href: "#sistemas-sob-medida" },
+  { code: "INT", title: "INTEGRAÇÃO DE SISTEMAS", description: "ERPs, APIs, bancos de dados e sistemas legados conectados.", href: "#integracoes-industriais", featured: true },
+  { code: "AUT", title: "AUTOMAÇÃO INDUSTRIAL", description: "Equipamentos, produção, impressão, leitura e controle de linha.", href: "#automacao-processos" },
+  { code: "TRC", title: "RASTREABILIDADE E QUALIDADE", description: "Controle por lote, serial, inspeção, rejeição e histórico completo.", href: "#dados-rastreabilidade" },
 ];
 
 const solutions = [
@@ -135,8 +135,8 @@ export default function Home() {
               <p><strong>D2 CODE</strong><span>SISTEMAS SOB MEDIDA<br />ATIBAIA · SP</span></p>
             </div>
             <div className="actions">
-              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer">INICIAR UMA CONVERSA <b>→</b></a>
-              <a className="plain" href="#servicos">CONHECER AS SOLUÇÕES ↓</a>
+              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Iniciar uma conversa com a D2 Code pelo WhatsApp">INICIAR UMA CONVERSA <b>→</b></a>
+              <a className="plain" href="#servicos">CONHECER AS SOLUÇÕES <b>↓</b></a>
             </div>
             <div className="status"><span>● D2 CODE ONLINE</span><span>ATIBAIA — SP · BRASIL</span></div>
           </div>
@@ -202,8 +202,8 @@ export default function Home() {
           </div>
           <div className="service-grid">
             {services.map((service) => (
-              <article key={service[0]}>
-                <b>{service[0]}</b><h3>{service[1]}</h3><p>{service[2]}</p>
+              <article key={service.number} id={service.id}>
+                <b>{service.number}</b><h3>{service.title}</h3><p>{service.description}</p>
               </article>
             ))}
           </div>
@@ -217,11 +217,21 @@ export default function Home() {
           <h2>Da gestão ao chão de fábrica, com <span>controle de ponta a ponta.</span></h2>
           <div className="modules">
             {operationAreas.map((area) => (
-              <article key={area[0]}>
-                <div className="module-title"><span>{area[0]}</span><i>×</i></div>
-                <div><h3>{area[1]}</h3><p>{area[2]}</p></div>
-                <small>STATUS: READY</small>
-              </article>
+              <a
+                className={`module-link${area.featured ? " featured" : ""}`}
+                href={area.href}
+                key={area.code}
+                aria-label={`${area.title}: ver detalhes em O que fazemos`}
+              >
+                <article>
+                  <div className="module-title">
+                    <span>{area.code}</span>
+                    <i aria-hidden="true">{area.featured ? "DESTAQUE ↘" : "ABRIR ↘"}</i>
+                  </div>
+                  <div><h3>{area.title}</h3><p>{area.description}</p></div>
+                  <small>VER DETALHES →</small>
+                </article>
+              </a>
             ))}
           </div>
         </div>
@@ -304,8 +314,8 @@ export default function Home() {
           <h2>Existe um jeito melhor de fazer?</h2>
           <p>Conte o desafio. A gente transforma complexidade em software que funciona.</p>
           <div className="contact-options">
-            <a className="btn booking" href={BOOKINGS} target="_blank" rel="noreferrer">AGENDAR UMA CONVERSA <b>→</b></a>
-            <a className="btn light" href={WHATSAPP} target="_blank" rel="noreferrer">FALAR PELO WHATSAPP <b>→</b></a>
+            <a className="btn booking" href={BOOKINGS} target="_blank" rel="noreferrer" aria-label="Abrir a agenda online da D2 Code">ABRIR AGENDA ONLINE <b>↗</b></a>
+            <a className="btn light" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Falar com a D2 Code pelo WhatsApp">FALAR PELO WHATSAPP <b>↗</b></a>
           </div>
           <address className="contact-details">
             <strong>Diego Carvalho</strong>

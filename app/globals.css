@@ -85,14 +85,28 @@ header nav{font-size:12px;gap:28px}
 
 /* 2026 positioning update — extends the existing visual system. */
 body{overflow-x:hidden}
-a,button{outline-offset:4px}
-a:focus-visible,button:focus-visible{outline:2px solid var(--orange);border-radius:4px}
+a,button{outline-offset:4px;touch-action:manipulation}
+a:focus-visible,button:focus-visible{outline:3px solid var(--orange);outline-offset:4px;border-radius:4px}
 button{font:inherit;color:inherit}
 .hero h1{max-width:760px}
 .hero h1 span,.operation h2 span,.solutions-heading h2 span{color:var(--orange)}
 .hero .actions .btn{min-width:245px}
+.btn,.plain,.contact-link{min-height:44px;align-items:center}
+.plain{display:inline-flex;gap:10px;padding:10px 2px;border-bottom:1px solid transparent;transition:.2s}
+.plain:hover{color:var(--navy);border-bottom-color:var(--orange)}
+.btn:active,.plain:active,.contact-link:active,.section-contact-actions a:active{transform:translateY(1px)}
 .ticker div{width:max-content;will-change:transform}
 .operation h2{max-width:920px}
+.service-grid article[id]{scroll-margin-top:24px}
+.module-link{display:block;min-width:0;height:100%;border-radius:9px}
+.module-link article{height:100%;cursor:pointer}
+.module-link:hover article,.module-link:focus-visible article{border-color:var(--blue);transform:translateY(-4px);box-shadow:0 16px 38px #16334916}
+.module-link:focus-visible{outline-offset:5px}
+.module-link:active article{transform:translateY(-1px);box-shadow:0 8px 20px #16334912}
+.module-link.featured article{border-color:#315f7b88;box-shadow:inset 0 3px 0 var(--orange)}
+.module-link.featured .module-title{color:var(--navy)}
+.module-title i{font-style:normal;color:var(--orange)}
+.modules .module-link small{display:flex;align-items:center;min-height:44px}
 
 .field-solutions{background:var(--paper)}
 .solutions-heading{display:grid;grid-template-columns:1.2fr .8fr;gap:90px;align-items:end}
@@ -167,6 +181,18 @@ button{font:inherit;color:inherit}
   .privacy-header{margin-bottom:50px}
 }
 
+@media(max-width:580px){
+  header nav a{display:flex;align-items:center;min-height:44px}
+  .menu{min-width:44px;min-height:44px;align-items:center;justify-content:center}
+  .actions{gap:16px;width:100%}
+  .hero .actions .btn,.hero .actions .plain{width:100%;min-width:0;justify-content:space-between}
+  .modules{gap:18px}
+  .module-link article{min-height:0}
+  .contact-options{gap:12px}
+  .contact-options .btn{min-height:52px}
+  .footer-top a,.footer-bottom a{display:inline-flex;align-items:center;min-height:44px}
+}
+
 /* Focused layout corrections: hero rhythm, continuous ticker and tighter sections. */
 section[id]{scroll-margin-top:24px}
 .hero-layout{grid-template-columns:1.18fr .82fr;gap:60px}
@@ -222,7 +248,7 @@ section[id]{scroll-margin-top:24px}
 .section-contact p{margin:0;font-size:15px;font-weight:700;line-height:1.45}
 .section-contact p span{color:var(--orange);font:10px "Courier New",monospace;margin-right:12px}
 .section-contact-actions{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.section-contact-actions a{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-width:190px;padding:12px 14px;border:1px solid var(--navy);border-radius:4px;font:700 10px "Courier New",monospace;letter-spacing:.03em;transition:.2s}
+.section-contact-actions a{display:inline-flex;align-items:center;justify-content:space-between;gap:22px;min-width:190px;min-height:44px;padding:12px 14px;border:1px solid var(--navy);border-radius:4px;font:700 10px "Courier New",monospace;letter-spacing:.03em;transition:.2s}
 .section-contact-actions a:first-child{background:var(--navy);color:var(--white)}
 .section-contact-actions a:hover{background:var(--blue);border-color:var(--blue);color:var(--white);transform:translateY(-2px)}
 .window-body .logo{display:block;margin-left:auto;margin-right:auto}
@@ -238,5 +264,7 @@ section[id]{scroll-margin-top:24px}
 @media(max-width:580px){
   .section-contact p{font-size:15px}
   .section-contact-actions{display:grid;grid-template-columns:1fr}
-  .section-contact-actions a{width:100%;min-width:0;padding:14px}
+  .section-contact-actions a{width:100%;min-width:0;min-height:48px;padding:14px}
+  .contact-details a{display:flex;align-items:center;min-height:44px}
+  .consent-actions button{min-height:44px}
 }
