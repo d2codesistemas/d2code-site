@@ -73,6 +73,24 @@ function Logo({ compact = false }: { compact?: boolean }) {
   );
 }
 
+function SectionContact({ text }: { text: string }) {
+  return (
+    <aside className="section-contact" aria-label="Entre em contato com a D2 Code">
+      <div className="container section-contact-layout">
+        <p><span>◆</span>{text}</p>
+        <div className="section-contact-actions">
+          <a href={WHATSAPP} target="_blank" rel="noreferrer">
+            FALAR PELO WHATSAPP <b>→</b>
+          </a>
+          <a href={BOOKINGS} target="_blank" rel="noreferrer">
+            AGENDAR CONVERSA <b>↗</b>
+          </a>
+        </div>
+      </div>
+    </aside>
+  );
+}
+
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const closeMenu = () => setMenu(false);
@@ -166,6 +184,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <SectionContact text="Tem um desafio que não cabe em uma solução pronta?" />
 
       <section className="section services" id="servicos">
         <div className="container">
@@ -183,6 +202,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <SectionContact text="Quer entender qual solução faz sentido para a sua operação?" />
 
       <section className="section operation" id="atuacao">
         <div className="container">
@@ -199,6 +219,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <SectionContact text="Precisa conectar sistemas, equipamentos e dados?" />
 
       <section className="section field-solutions" id="solucoes">
         <div className="container">
@@ -217,6 +238,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <SectionContact text="Existe um processo que precisa de mais controle ou rastreabilidade?" />
 
       <section className="section about" id="sobre">
         <div className="container about-layout">
@@ -240,6 +262,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <SectionContact text="Vamos conversar sobre a realidade da sua empresa?" />
 
       <section className="section technologies" id="tecnologias">
         <div className="container">
@@ -252,6 +275,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+      <SectionContact text="Tem uma integração ou sistema legado para evoluir?" />
 
       <section className="section process-section" id="processo">
         <div className="container">
