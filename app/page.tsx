@@ -142,7 +142,14 @@ export default function Home() {
           </div>
           <div className="hero-brand" aria-hidden="true">
             <div className="window">
-              <div className="titlebar"><span>D2CODE.EXE</span><i>_ □ ×</i></div>
+              <div className="titlebar">
+                <span>D2CODE.EXE</span>
+                <div className="window-controls" aria-hidden="true">
+                  <i>−</i>
+                  <i>□</i>
+                  <i>×</i>
+                </div>
+              </div>
               <div className="window-body">
                 <Logo />
                 <div className="boot">
