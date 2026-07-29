@@ -142,6 +142,7 @@ export default function Home() {
           <a href="#servicos" onClick={closeMenu}>SERVIÇOS</a>
           <a href="#atuacao" onClick={closeMenu}>ATUAÇÃO</a>
           <a href="#solucoes" onClick={closeMenu}>SOLUÇÕES</a>
+          <a href="#experiencia" onClick={closeMenu}>EXPERIÊNCIA</a>
           <a href="#sobre" onClick={closeMenu}>SOBRE</a>
           <a href="#processo" onClick={closeMenu}>PROCESSO</a>
           <a className="contact-link" href="#contato" onClick={closeMenu}>[ FALE COM A D2 ]</a>
@@ -283,7 +284,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section applied-experience" aria-labelledby="experiencia-aplicada">
+      <section className="section applied-experience" id="experiencia" aria-labelledby="experiencia-aplicada">
         <div className="container">
           <div className="section-label">05 / EXPERIÊNCIA APLICADA</div>
           <div className="experience-heading">

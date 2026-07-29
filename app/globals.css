@@ -286,6 +286,10 @@ section[id]{scroll-margin-top:24px}
 .experience-grid p{margin:0;font-size:15px;line-height:1.65;color:var(--muted)}
 .experience-note{margin:20px 0 0;font:10px/1.6 "Courier New",monospace;color:#7b858b}
 
+@media(min-width:901px){
+  header nav{gap:22px}
+}
+
 @media(max-width:900px){
   .experience-heading{grid-template-columns:1fr;gap:26px}
   .experience-grid{grid-template-columns:1fr}
