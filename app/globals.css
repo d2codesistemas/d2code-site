@@ -268,3 +268,30 @@ section[id]{scroll-margin-top:24px}
   .contact-details a{display:flex;align-items:center;min-height:44px}
   .consent-actions button{min-height:44px}
 }
+
+/* Anonymized technical experience developed before and carried into D2 Code. */
+.applied-experience{background:#eef2f2}
+.experience-heading{display:grid;grid-template-columns:1.05fr .95fr;gap:90px;align-items:end}
+.experience-heading h2 span{color:var(--orange)}
+.experience-heading>p{margin:0;font-size:17px;line-height:1.75;color:var(--muted)}
+.experience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:58px}
+.experience-grid article{min-height:210px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:9px;background:white;overflow:hidden;transition:.2s}
+.experience-grid article:hover{transform:translateY(-3px);border-color:#315f7b77;box-shadow:0 14px 35px #1633490d}
+.experience-status{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;min-height:42px;padding:10px 15px;background:#f3f5f5;border-bottom:1px solid var(--line);font:700 10px "Courier New",monospace}
+.experience-status span{color:var(--orange)}
+.experience-status code{color:var(--blue);font:inherit}
+.experience-status i{color:#4f8267;font-style:normal}
+.experience-grid article>div:last-child{padding:25px 27px}
+.experience-grid h3{margin:0 0 12px;font-size:19px}
+.experience-grid p{margin:0;font-size:15px;line-height:1.65;color:var(--muted)}
+.experience-note{margin:20px 0 0;font:10px/1.6 "Courier New",monospace;color:#7b858b}
+
+@media(max-width:900px){
+  .experience-heading{grid-template-columns:1fr;gap:26px}
+  .experience-grid{grid-template-columns:1fr}
+}
+
+@media(max-width:580px){
+  .experience-grid{margin-top:42px}
+  .experience-grid article{min-height:0}
+}

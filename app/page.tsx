@@ -33,6 +33,33 @@ const solutions = [
   ["06", "Modernização de sistemas", "Evolução de aplicações legadas sem interromper operações já consolidadas."],
 ];
 
+const appliedExperience = [
+  {
+    code: "OP→PRINT",
+    title: "Integração de produção e impressão",
+    description:
+      "Sistemas que recebem dados da ordem de produção e configuram automaticamente impressoras e datadores, reduzindo operações manuais e inconsistências.",
+  },
+  {
+    code: "VISION.OK",
+    title: "Inspeção e validação automática",
+    description:
+      "Soluções com câmeras e leitores para conferir códigos, dados variáveis, presença, posicionamento, aparência e conformidade do produto.",
+  },
+  {
+    code: "TRACE.ID",
+    title: "Rastreabilidade e códigos únicos",
+    description:
+      "Controle de lotes, seriais, QR Codes, pharmacodes e códigos promocionais, com registro completo das leituras e ocorrências.",
+  },
+  {
+    code: "LOG.DATA",
+    title: "Relatórios e histórico operacional",
+    description:
+      "Armazenamento das informações de produção, inspeção e rejeição, com consultas e relatórios personalizados.",
+  },
+];
+
 const technologies = [
   "C# e .NET",
   "Delphi",
@@ -255,6 +282,32 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="section applied-experience" aria-labelledby="experiencia-aplicada">
+        <div className="container">
+          <div className="section-label">05 / EXPERIÊNCIA APLICADA</div>
+          <div className="experience-heading">
+            <h2 id="experiencia-aplicada">Experiência construída <span>em operação.</span></h2>
+            <p>Antes mesmo da fundação da D2 Code, seu responsável técnico já desenvolvia e implantava sistemas para ambientes industriais e operações críticas. Essa experiência prática hoje orienta as soluções entregues pela empresa.</p>
+          </div>
+          <div className="experience-grid">
+            {appliedExperience.map((experience, index) => (
+              <article key={experience.code}>
+                <div className="experience-status">
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <code>{experience.code}</code>
+                  <i aria-hidden="true">[ OK ]</i>
+                </div>
+                <div>
+                  <h3>{experience.title}</h3>
+                  <p>{experience.description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <p className="experience-note">Exemplos apresentados de forma anônima, sem identificação de clientes ou exposição de informações operacionais.</p>
+        </div>
+      </section>
       <SectionContact text="Existe um processo que precisa de mais controle ou rastreabilidade?" />
 
       <section className="section about" id="sobre">
@@ -265,7 +318,7 @@ export default function Home() {
             <div className="poster-lines">DESIGN / DEVELOPMENT / INTEGRATION<br />ATIBAIA — SP</div>
           </div>
           <div className="about-copy">
-            <div className="section-label inverse">05 / SOBRE A D2 CODE</div>
+            <div className="section-label inverse">06 / SOBRE A D2 CODE</div>
             <h2>Experiência técnica.<br /><span>Visão de negócio.</span></h2>
             <p>A D2 Code é uma empresa de Atibaia especializada em software sob medida, integrações e automação de processos.</p>
             <p>Nascemos em 2025, reunindo anos de experiência prática em ambientes industriais, sistemas críticos e operações que exigem confiabilidade. Desenvolvemos soluções que conectam pessoas, processos, dados e equipamentos, respeitando a realidade de cada cliente.</p>
@@ -283,7 +336,7 @@ export default function Home() {
 
       <section className="section technologies" id="tecnologias">
         <div className="container">
-          <div className="section-label">06 / TECNOLOGIAS &amp; INTEGRAÇÕES</div>
+          <div className="section-label">07 / TECNOLOGIAS &amp; INTEGRAÇÕES</div>
           <h2>Tecnologias e equipamentos com os quais trabalhamos.</h2>
           <div className="tech-grid">
             {technologies.map((technology, index) => (
@@ -296,7 +349,7 @@ export default function Home() {
 
       <section className="section process-section" id="processo">
         <div className="container">
-          <div className="section-label">07 / COMO TRABALHAMOS</div>
+          <div className="section-label">08 / COMO TRABALHAMOS</div>
           <h2>Do diagnóstico à entrada em operação.</h2>
           <div className="steps">
             {steps.map((step) => (
