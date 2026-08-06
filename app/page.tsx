@@ -60,6 +60,30 @@ const appliedExperience = [
   },
 ];
 
+const operationVideos = [
+  {
+    code: "CAPTURE.TRACE",
+    title: "Captura e rastreabilidade",
+    description: "Códigos capturados, validados e registrados pelo sistema antes da impressão automática da etiqueta.",
+    src: "/videos/captura-rastreabilidade.mp4",
+    poster: "/videos/captura-rastreabilidade.jpg",
+  },
+  {
+    code: "PRINT.ZEBRA",
+    title: "Impressão industrial com Zebra",
+    description: "Seleção da ordem, geração do conteúdo e preparação dos dados para impressão industrial.",
+    src: "/videos/impressao-zebra.mp4",
+    poster: "/videos/impressao-zebra.jpg",
+  },
+  {
+    code: "DEVICE.VIDEOJET",
+    title: "Integração direta com Videojet",
+    description: "Dados da ordem e do lote enviados pelo sistema ao equipamento, sem digitação manual.",
+    src: "/videos/integracao-videojet.mp4",
+    poster: "/videos/integracao-videojet.jpg",
+  },
+];
+
 const technologies = [
   "C# e .NET",
   "Delphi",
@@ -307,6 +331,35 @@ export default function Home() {
             ))}
           </div>
           <p className="experience-note">Exemplos apresentados de forma anônima, sem identificação de clientes ou exposição de informações operacionais.</p>
+          <div className="video-showcase" aria-labelledby="tecnologia-em-operacao">
+            <div className="video-showcase-heading">
+              <p className="kicker">REAL_OPERATION.D2C</p>
+              <h3 id="tecnologia-em-operacao">Tecnologia em operação.</h3>
+              <p>Fluxos reais que conectam software, dados e equipamentos no dia a dia da produção.</p>
+            </div>
+            <div className="video-grid">
+              {operationVideos.map((video, index) => (
+                <article key={video.code}>
+                  <div className="video-frame">
+                    <video
+                      controls
+                      playsInline
+                      preload="metadata"
+                      poster={video.poster}
+                      aria-label={`${video.title}: demonstração em vídeo`}
+                    >
+                      <source src={video.src} type="video/mp4" />
+                      Seu navegador não suporta a reprodução deste vídeo.
+                    </video>
+                    <span aria-hidden="true">0{index + 1}</span>
+                  </div>
+                  <code>{video.code}</code>
+                  <h4>{video.title}</h4>
+                  <p>{video.description}</p>
+                </article>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
       <SectionContact text="Existe um processo que precisa de mais controle ou rastreabilidade?" />
