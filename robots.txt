@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+
+Host: https://d2code.com.br
+Sitemap: https://d2code.com.br/sitemap.xml
