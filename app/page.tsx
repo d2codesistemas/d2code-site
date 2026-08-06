@@ -6,7 +6,7 @@ import Image from "next/image";
 const WHATSAPP =
   "https://wa.me/5511950263057?text=Olá%2C%20Diego!%20Gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa.";
 const BOOKINGS =
-  "https://outlook.office.com/bookwithme/user/7e13239b8ae54948829532ecc6f73f20@d2code.com.br/meetingtype/FCKJ91NRhE2z8E1pRqqKiQ2?anonymous&ismsaljsauthenabled";
+  "https://outlook.office365.com/owa/calendar/D2Code@d2codesistemas.com.br/bookings/";
 
 const services = [
   { number: "01", id: "sistemas-sob-medida", title: "Sistemas sob medida", description: "Aplicações web, desktop e serviços desenvolvidos para a realidade do seu negócio." },
