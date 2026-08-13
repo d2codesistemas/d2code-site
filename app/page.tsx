@@ -323,12 +323,12 @@ export default function Home() {
       <section className="inspection-feature" aria-labelledby="inspecao-industrial-destaque">
         <div className="container inspection-feature-layout">
           <div>
-            <p className="kicker">INSPEÇÃO INDUSTRIAL // VISÃO COMPUTACIONAL + IA</p>
+            <p className="kicker">SISTEMAS DE VISÃO // SOFTWARE &amp; INTEGRAÇÃO</p>
             <h2 id="inspecao-industrial-destaque">Uma câmera identifica. <span>O software transforma o resultado em processo.</span></h2>
           </div>
           <div className="inspection-feature-copy">
-            <p>Integramos câmeras e sistemas de visão à lógica da operação: receitas, critérios de aprovação, resultados OK/NOK, rastreabilidade, alarmes, bloqueios e comunicação com os demais sistemas da empresa.</p>
-            <a className="btn" href="/inspecao-industrial/" onClick={() => trackClarityEvent("cta_inspecao")}>CONHECER INSPEÇÃO INDUSTRIAL <b>→</b></a>
+            <p>Integramos câmeras e sistemas de visão — inclusive equipamentos com recursos de IA — à lógica da operação: receitas, critérios, resultados OK/NOK, rastreabilidade, alarmes, bloqueios e comunicação com os demais sistemas.</p>
+            <a className="btn" href="/inspecao-industrial/" onClick={() => trackClarityEvent("cta_inspecao")}>VER INTEGRAÇÃO DE VISÃO <b>→</b></a>
           </div>
         </div>
       </section>
