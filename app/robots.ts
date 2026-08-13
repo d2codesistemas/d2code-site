@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: "*",
       allow: "/",
-      disallow: ["/logos", "/logos/"],
+      disallow: ["/logos", "/logos/", "/inspecao-industrial", "/inspecao-industrial/"],
     },
     sitemap: "https://d2code.com.br/sitemap.xml",
     host: "https://d2code.com.br",

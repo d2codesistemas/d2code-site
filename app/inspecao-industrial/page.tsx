@@ -12,6 +12,7 @@ export const metadata: Metadata = {
     url: "/inspecao-industrial/",
     images: ["/og.png"],
   },
+  robots: { index: false, follow: false },
 };
 
 export default function InspectionIndustrialPage() {

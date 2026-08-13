@@ -13,7 +13,7 @@ const services = [
   { number: "01", id: "sistemas-sob-medida", title: "Sistemas sob medida", description: "Aplicações web, desktop e serviços desenvolvidos para a realidade do seu negócio." },
   { number: "02", id: "integracoes-industriais", title: "Integrações industriais", description: "Câmeras, leitores, impressoras, CLPs, RFID, ERPs, APIs e bancos de dados trabalhando no mesmo fluxo." },
   { number: "03", id: "automacao-processos", title: "Automação de processos", description: "Menos tarefas manuais, menos retrabalho e mais controle sobre a operação." },
-  { number: "04", id: "inspecao-qualidade", title: "Inspeção & qualidade", description: "Validação automática, leitura de códigos, visão computacional e bloqueio de falhas no processo.", href: "/inspecao-industrial/" },
+  { number: "04", id: "inspecao-qualidade", title: "Inspeção & qualidade", description: "Integração de câmeras e sistemas de visão — inclusive com IA embarcada — às regras, registros e ações do processo.", href: "#experiencia-inspecao" },
   { number: "05", id: "dados-rastreabilidade", title: "Dados & rastreabilidade", description: "Controle de lotes, seriais, produção, movimentações e histórico operacional." },
   { number: "06", id: "evolucao-sistemas", title: "Evolução de sistemas", description: "Modernização e continuidade para soluções que já fazem parte da empresa." },
 ];
@@ -28,7 +28,7 @@ const operationAreas = [
 const solutions = [
   ["01", "Rastreabilidade industrial", "Controle de ordens, lotes, seriais, produção, refugo e qualidade."],
   ["02", "Integração com equipamentos", "Comunicação com câmeras, leitores, impressoras, CLPs e dispositivos de identificação."],
-  ["03", "Inspeção automática", "Validação de códigos, conteúdo, presença, posicionamento e conformidade de produtos.", "/inspecao-industrial/"],
+  ["03", "Inspeção automática", "Resultados de câmeras e sistemas de visão conectados a receitas, OK/NOK, rastreabilidade e ações de linha.", "#experiencia-inspecao"],
   ["04", "Impressão e serialização", "Geração, envio e controle de dados variáveis para impressoras industriais e etiquetas."],
   ["05", "RFID e identificação", "Leitura, gravação e rastreamento de produtos, embalagens e movimentações."],
   ["06", "Modernização de sistemas", "Evolução de aplicações legadas sem interromper operações já consolidadas."],
@@ -37,24 +37,28 @@ const solutions = [
 const appliedExperience = [
   {
     code: "OP→PRINT",
+    id: "experiencia-impressao",
     title: "Integração de produção e impressão",
     description:
       "Sistemas que recebem dados da ordem de produção e configuram automaticamente impressoras e datadores, reduzindo operações manuais e inconsistências.",
   },
   {
     code: "VISION.OK",
+    id: "experiencia-inspecao",
     title: "Inspeção e validação automática",
     description:
       "Soluções com câmeras e leitores para conferir códigos, dados variáveis, presença, posicionamento, aparência e conformidade do produto.",
   },
   {
     code: "TRACE.ID",
+    id: "experiencia-rastreabilidade",
     title: "Rastreabilidade e códigos únicos",
     description:
       "Controle de lotes, seriais, QR Codes, pharmacodes e códigos promocionais, com registro completo das leituras e ocorrências.",
   },
   {
     code: "LOG.DATA",
+    id: "experiencia-dados",
     title: "Relatórios e histórico operacional",
     description:
       "Armazenamento das informações de produção, inspeção e rejeição, com consultas e relatórios personalizados.",
@@ -62,6 +66,13 @@ const appliedExperience = [
 ];
 
 const operationVideos = [
+  {
+    code: "VISION.KEYENCE",
+    title: "Inspeção com sistema de visão",
+    description: "O equipamento executa a análise; o software integra o resultado, a receita e as ações necessárias ao fluxo da operação.",
+    src: "/videos/visao-keyence-contagem-roda.mp4",
+    poster: "/videos/visao-keyence-contagem-roda.jpg",
+  },
   {
     code: "CAPTURE.TRACE",
     title: "Captura e rastreabilidade",
@@ -320,22 +331,6 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="inspection-feature" aria-labelledby="equipamentos-conectados-destaque">
-        <div className="container inspection-feature-layout">
-          <div>
-            <p className="kicker">EQUIPAMENTOS CONECTADOS // SOFTWARE &amp; INTEGRAÇÃO</p>
-            <h2 id="equipamentos-conectados-destaque">Câmeras identificam. Impressoras marcam. <span>O software coordena o processo.</span></h2>
-          </div>
-          <div className="inspection-feature-copy">
-            <p>A D2 integra câmeras, sistemas de visão, leitores, impressoras industriais, marcadores, CLPs e sistemas internos. Conectamos receitas, resultados OK/NOK, dados variáveis, impressão, alarmes e rastreabilidade ao mesmo fluxo operacional.</p>
-            <div className="equipment-paths">
-              <a href="/inspecao-industrial/" onClick={() => trackClarityEvent("cta_inspecao")}><span>SISTEMAS DE VISÃO</span><small>INSPEÇÃO, OK/NOK E AÇÕES DE LINHA</small><b>→</b></a>
-              <a href="#experiencia" onClick={() => trackClarityEvent("card_solucao")}><span>IMPRESSÃO &amp; SERIALIZAÇÃO</span><small>ZEBRA, VIDEOJET, SATO E DADOS VARIÁVEIS</small><b>↓</b></a>
-            </div>
-          </div>
-        </div>
-      </section>
-
       <section className="section applied-experience" id="experiencia" aria-labelledby="experiencia-aplicada">
         <div className="container">
           <div className="section-label">05 / EXPERIÊNCIA APLICADA</div>
@@ -345,7 +340,7 @@ export default function Home() {
           </div>
           <div className="experience-grid">
             {appliedExperience.map((experience, index) => (
-              <article key={experience.code}>
+              <article key={experience.code} id={experience.id}>
                 <div className="experience-status">
                   <span>{String(index + 1).padStart(2, "0")}</span>
                   <code>{experience.code}</code>

@@ -126,19 +126,6 @@ button{font:inherit;color:inherit}
 .value-cards article:hover,.experience-grid article:hover{transform:none;box-shadow:none;border-color:var(--line)}
 .value-cards article:hover:after{width:0}
 
-/* Inspection service spotlight keeps the established editorial/technical system. */
-.inspection-feature{padding:78px 0;background:var(--navy);color:white;border-bottom:1px solid #ffffff22}
-.inspection-feature-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:84px;align-items:end}
-.inspection-feature h2{margin:22px 0 0;font-size:clamp(38px,4vw,58px);line-height:1.03;letter-spacing:-.045em}
-.inspection-feature h2 span{color:#eda27f}
-.inspection-feature-copy>p{margin:0 0 28px;color:#dce5ea;font-size:16px;line-height:1.75}
-.equipment-paths{display:grid;gap:10px}
-.equipment-paths a{position:relative;display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:center;min-height:72px;padding:14px 17px;border:1px solid #ffffff44;border-radius:5px;background:#ffffff0b;transition:.2s}
-.equipment-paths a:hover,.equipment-paths a:focus-visible{border-color:#eda27f;background:#ffffff15;transform:translateY(-2px)}
-.equipment-paths span{font:700 11px "Courier New",monospace;letter-spacing:.04em}
-.equipment-paths small{font:9px "Courier New",monospace;color:#bfcdd5}
-.equipment-paths b{grid-column:2;grid-row:1/3;color:#eda27f}
-
 /* Dedicated inspection page. */
 .inspection-page{background:var(--paper)}
 .inspection-header{position:absolute}
@@ -191,15 +178,13 @@ button{font:inherit;color:inherit}
 .inspection-footer{display:flex;justify-content:space-between;gap:24px;font:11px/1.7 "Courier New",monospace;color:#7c878d}
 
 @media(max-width:900px){
-  .inspection-feature-layout,.inspection-hero-layout,.inspection-split,.inspection-heading{grid-template-columns:1fr;gap:34px}
+  .inspection-hero-layout,.inspection-split,.inspection-heading{grid-template-columns:1fr;gap:34px}
   .inspection-header nav{display:flex}
   .inspection-card-grid{grid-template-columns:repeat(2,1fr)}
   .vision-demo-grid{grid-template-columns:1fr}
   .inspection-steps{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:680px){
-  .inspection-feature{padding:62px 0}
-  .inspection-feature-layout{gap:26px}
   .inspection-header nav{display:none}
   .inspection-hero{padding:126px 0 70px}
   .inspection-hero h1{font-size:48px}
@@ -375,6 +360,7 @@ section[id]{scroll-margin-top:24px}
 .experience-heading>p{margin:0;font-size:17px;line-height:1.75;color:var(--muted)}
 .experience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:58px}
 .experience-grid article{min-height:210px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:9px;background:white;overflow:hidden;transition:.2s}
+.experience-grid article[id]{scroll-margin-top:112px}
 .experience-status{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;min-height:42px;padding:10px 15px;background:#f3f5f5;border-bottom:1px solid var(--line);font:700 10px "Courier New",monospace}
 .experience-status span{color:var(--orange)}
 .experience-status code{color:var(--blue);font:inherit}
@@ -404,7 +390,7 @@ section[id]{scroll-margin-top:24px}
 .video-showcase-heading .kicker{grid-column:1/-1;margin:0 0 18px}
 .video-showcase-heading h3{margin:0;font-size:clamp(36px,4vw,56px);line-height:1;letter-spacing:-.045em}
 .video-showcase-heading>p:last-child{margin:0;font-size:16px;line-height:1.7;color:var(--muted)}
-.video-grid{display:grid;grid-template-columns:repeat(3,minmax(0,320px));justify-content:space-between;gap:28px}
+.video-grid{display:grid;grid-template-columns:repeat(4,minmax(0,260px));justify-content:space-between;gap:24px}
 .video-grid article{min-width:0}
 .video-frame{position:relative;overflow:hidden;aspect-ratio:9/16;border:1px solid #b8c0c4;border-radius:10px;background:var(--navy);box-shadow:0 18px 42px #16334917}
 .video-frame video{display:block;width:100%;height:100%;object-fit:contain;background:#0d202c}
