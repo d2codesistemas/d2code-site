@@ -16,5 +16,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "yearly",
       priority: 0.2,
     },
+    {
+      url: "https://d2code.com.br/inspecao-industrial/",
+      lastModified: new Date("2026-08-13"),
+      changeFrequency: "monthly",
+      priority: 0.9,
+    },
   ];
 }

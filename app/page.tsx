@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { trackClarityEvent } from "./clarity";
 
 const WHATSAPP =
   "https://wa.me/5511950263057?text=Olá%2C%20Diego!%20Gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa.";
@@ -12,7 +13,7 @@ const services = [
   { number: "01", id: "sistemas-sob-medida", title: "Sistemas sob medida", description: "Aplicações web, desktop e serviços desenvolvidos para a realidade do seu negócio." },
   { number: "02", id: "integracoes-industriais", title: "Integrações industriais", description: "Câmeras, leitores, impressoras, CLPs, RFID, ERPs, APIs e bancos de dados trabalhando no mesmo fluxo." },
   { number: "03", id: "automacao-processos", title: "Automação de processos", description: "Menos tarefas manuais, menos retrabalho e mais controle sobre a operação." },
-  { number: "04", id: "inspecao-qualidade", title: "Inspeção & qualidade", description: "Validação automática, leitura de códigos, visão computacional e bloqueio de falhas no processo." },
+  { number: "04", id: "inspecao-qualidade", title: "Inspeção & qualidade", description: "Validação automática, leitura de códigos, visão computacional e bloqueio de falhas no processo.", href: "/inspecao-industrial/" },
   { number: "05", id: "dados-rastreabilidade", title: "Dados & rastreabilidade", description: "Controle de lotes, seriais, produção, movimentações e histórico operacional." },
   { number: "06", id: "evolucao-sistemas", title: "Evolução de sistemas", description: "Modernização e continuidade para soluções que já fazem parte da empresa." },
 ];
@@ -27,7 +28,7 @@ const operationAreas = [
 const solutions = [
   ["01", "Rastreabilidade industrial", "Controle de ordens, lotes, seriais, produção, refugo e qualidade."],
   ["02", "Integração com equipamentos", "Comunicação com câmeras, leitores, impressoras, CLPs e dispositivos de identificação."],
-  ["03", "Inspeção automática", "Validação de códigos, conteúdo, presença, posicionamento e conformidade de produtos."],
+  ["03", "Inspeção automática", "Validação de códigos, conteúdo, presença, posicionamento e conformidade de produtos.", "/inspecao-industrial/"],
   ["04", "Impressão e serialização", "Geração, envio e controle de dados variáveis para impressoras industriais e etiquetas."],
   ["05", "RFID e identificação", "Leitura, gravação e rastreamento de produtos, embalagens e movimentações."],
   ["06", "Modernização de sistemas", "Evolução de aplicações legadas sem interromper operações já consolidadas."],
@@ -95,8 +96,10 @@ const technologies = [
   "Modbus TCP",
   "Zebra",
   "Keyence",
+  "Hikvision",
   "Cognex",
   "Videojet",
+  "Sato",
   "RFID",
   "Leitores industriais",
   "Impressoras industriais",
@@ -130,7 +133,7 @@ function SectionContact({ text }: { text: string }) {
       <div className="container section-contact-layout">
         <p><span>◆</span>{text}</p>
         <div className="section-contact-actions">
-          <a href={WHATSAPP} target="_blank" rel="noreferrer">
+          <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>
             FALAR PELO WHATSAPP <b>→</b>
           </a>
           <a href={BOOKINGS} target="_blank" rel="noreferrer">
@@ -169,7 +172,7 @@ export default function Home() {
           <a href="#experiencia" onClick={closeMenu}>EXPERIÊNCIA</a>
           <a href="#sobre" onClick={closeMenu}>SOBRE</a>
           <a href="#processo" onClick={closeMenu}>PROCESSO</a>
-          <a className="contact-link" href="#contato" onClick={closeMenu}>[ FALE COM A D2 ]</a>
+          <a className="contact-link" href="#contato" onClick={() => { trackClarityEvent("whatsapp_contato"); closeMenu(); }}>[ FALE COM A D2 ]</a>
         </nav>
       </header>
 
@@ -187,8 +190,8 @@ export default function Home() {
               <p><strong>D2 CODE</strong><span>SISTEMAS SOB MEDIDA<br />ATIBAIA · SP</span></p>
             </div>
             <div className="actions">
-              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Iniciar uma conversa com a D2 Code pelo WhatsApp">INICIAR UMA CONVERSA <b>→</b></a>
-              <a className="plain" href="#servicos">CONHECER AS SOLUÇÕES <b>↓</b></a>
+              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Iniciar uma conversa com a D2 Code pelo WhatsApp" onClick={() => trackClarityEvent("cta_conversa")}>INICIAR UMA CONVERSA <b>→</b></a>
+              <a className="plain" href="#servicos" onClick={() => trackClarityEvent("ver_servicos")}>CONHECER AS SOLUÇÕES <b>↓</b></a>
             </div>
             <div className="status"><span>● D2 CODE ONLINE</span><span>ATIBAIA — SP · BRASIL</span></div>
           </div>
@@ -253,11 +256,10 @@ export default function Home() {
             <div className="cursor" aria-hidden="true">_</div>
           </div>
           <div className="service-grid">
-            {services.map((service) => (
-              <article key={service.number} id={service.id}>
-                <b>{service.number}</b><h3>{service.title}</h3><p>{service.description}</p>
-              </article>
-            ))}
+            {services.map((service) => {
+              const content = <article id={service.id}><b>{service.number}</b><h3>{service.title}</h3><p>{service.description}</p>{service.href && <small>CONHECER ESTA SOLUÇÃO →</small>}</article>;
+              return service.href ? <a className="service-link" href={service.href} key={service.number} onClick={() => trackClarityEvent("cta_inspecao")} aria-label={`${service.title}: conhecer a solução`}>{content}</a> : <div className="service-static" key={service.number}>{content}</div>;
+            })}
           </div>
         </div>
       </section>
@@ -274,6 +276,7 @@ export default function Home() {
                 href={area.href}
                 key={area.code}
                 aria-label={`${area.title}: ver detalhes em O que fazemos`}
+                onClick={() => trackClarityEvent("card_atuacao")}
               >
                 <article>
                   <div className="module-title">
@@ -299,11 +302,33 @@ export default function Home() {
           </div>
           <div className="solution-grid">
             {solutions.map((solution) => (
-              <article key={solution[0]}>
-                <span>{solution[0]}</span>
-                <div><h3>{solution[1]}</h3><p>{solution[2]}</p></div>
-              </article>
+              <a
+                className="solution-link"
+                href={solution[3] ?? "#contato"}
+                key={solution[0]}
+                aria-label={`${solution[1]}: conversar com a D2 Code`}
+                onClick={() => trackClarityEvent("card_solucao")}
+              >
+                <article>
+                  <span>{solution[0]}</span>
+                  <div><h3>{solution[1]}</h3><p>{solution[2]}</p></div>
+                  <small>CONVERSAR SOBRE ESTA SOLUÇÃO →</small>
+                </article>
+              </a>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="inspection-feature" aria-labelledby="inspecao-industrial-destaque">
+        <div className="container inspection-feature-layout">
+          <div>
+            <p className="kicker">INSPEÇÃO INDUSTRIAL // VISÃO COMPUTACIONAL + IA</p>
+            <h2 id="inspecao-industrial-destaque">Uma câmera identifica. <span>O software transforma o resultado em processo.</span></h2>
+          </div>
+          <div className="inspection-feature-copy">
+            <p>Integramos câmeras e sistemas de visão à lógica da operação: receitas, critérios de aprovação, resultados OK/NOK, rastreabilidade, alarmes, bloqueios e comunicação com os demais sistemas da empresa.</p>
+            <a className="btn" href="/inspecao-industrial/" onClick={() => trackClarityEvent("cta_inspecao")}>CONHECER INSPEÇÃO INDUSTRIAL <b>→</b></a>
           </div>
         </div>
       </section>
@@ -422,13 +447,13 @@ export default function Home() {
           <p>Conte o desafio. A gente transforma complexidade em software que funciona.</p>
           <div className="contact-options">
             <a className="btn booking" href={BOOKINGS} target="_blank" rel="noreferrer" aria-label="Abrir a agenda online da D2 Code">ABRIR AGENDA ONLINE <b>↗</b></a>
-            <a className="btn light" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Falar com a D2 Code pelo WhatsApp">FALAR PELO WHATSAPP <b>↗</b></a>
+            <a className="btn light" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Falar com a D2 Code pelo WhatsApp" onClick={() => trackClarityEvent("whatsapp_contato")}>FALAR PELO WHATSAPP <b>↗</b></a>
           </div>
           <address className="contact-details">
             <strong>Diego Carvalho</strong>
             <span>Fundador e responsável técnico</span>
             <a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer">(11) 95026-3057</a>
+            <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a>
           </address>
         </div>
       </section>
@@ -439,13 +464,13 @@ export default function Home() {
           <p>D2 CODE SISTEMAS LTDA.<br />ATIBAIA — SP</p>
           <div>
             <a href="mailto:diego.carvalho@d2code.com.br">E-MAIL ↗</a>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer">WHATSAPP ↗</a>
+            <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>WHATSAPP ↗</a>
             <a href="https://www.linkedin.com/company/d2code" target="_blank" rel="noreferrer">LINKEDIN ↗</a>
           </div>
         </div>
         <div className="container footer-bottom">
           <span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span>
-          <span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a> · <a href={WHATSAPP} target="_blank" rel="noreferrer">(11) 95026-3057</a></span>
+          <span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a> · <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a></span>
           <span><a href="/privacidade/">PRIVACIDADE</a> · <a href="#inicio">VOLTAR AO TOPO ↑</a></span>
         </div>
       </footer>

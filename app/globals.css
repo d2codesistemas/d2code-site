@@ -112,11 +112,88 @@ button{font:inherit;color:inherit}
 .solutions-heading{display:grid;grid-template-columns:1.2fr .8fr;gap:90px;align-items:end}
 .solutions-heading>p{margin:0;font-size:17px;line-height:1.75;color:var(--muted)}
 .solution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:60px}
-.solution-grid article{display:grid;grid-template-columns:42px 1fr;gap:18px;align-items:start;min-height:154px;padding:26px 28px;border:1px solid var(--line);border-radius:9px;background:white;transition:.2s}
-.solution-grid article:hover{transform:translateY(-3px);border-color:#315f7b77;box-shadow:0 14px 35px #1633490d}
-.solution-grid>article>span{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#f6ede7;color:var(--orange);font:700 11px "Courier New",monospace}
+.solution-link{display:block;height:100%;min-width:0;border-radius:9px}
+.solution-grid article{position:relative;display:grid;grid-template-columns:42px 1fr;gap:18px;align-items:start;min-height:174px;height:100%;padding:26px 28px 58px;border:1px solid var(--line);border-radius:9px;background:white;transition:.2s;cursor:pointer}
+.solution-link:hover article,.solution-link:focus-visible article{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 14px 35px #1633490d}
+.solution-link:active article{transform:translateY(-1px)}
+.solution-link:focus-visible{outline-offset:5px}
+.solution-grid article>span{width:42px;height:42px;display:grid;place-items:center;border-radius:50%;background:#f6ede7;color:var(--orange);font:700 11px "Courier New",monospace}
 .solution-grid h3{font-size:18px;margin:3px 0 10px}
 .solution-grid p{margin:0;font-size:15px;line-height:1.65;color:var(--muted)}
+.solution-grid small{position:absolute;left:88px;right:28px;bottom:17px;display:flex;align-items:center;min-height:28px;color:#56846c;font:700 9px "Courier New",monospace;letter-spacing:.03em}
+
+/* Informational cards remain visually static so they do not suggest a click action. */
+.value-cards article:hover,.experience-grid article:hover{transform:none;box-shadow:none;border-color:var(--line)}
+.value-cards article:hover:after{width:0}
+
+/* Inspection service spotlight keeps the established editorial/technical system. */
+.inspection-feature{padding:78px 0;background:var(--navy);color:white;border-bottom:1px solid #ffffff22}
+.inspection-feature-layout{display:grid;grid-template-columns:1.15fr .85fr;gap:84px;align-items:end}
+.inspection-feature h2{margin:22px 0 0;font-size:clamp(38px,4vw,58px);line-height:1.03;letter-spacing:-.045em}
+.inspection-feature h2 span{color:#eda27f}
+.inspection-feature-copy>p{margin:0 0 28px;color:#dce5ea;font-size:16px;line-height:1.75}
+.inspection-feature .btn{background:var(--orange);border-color:var(--orange)}
+.inspection-feature .btn:hover{background:#bd5937;border-color:#bd5937}
+
+/* Dedicated inspection page. */
+.inspection-page{background:var(--paper)}
+.inspection-header{position:absolute}
+.inspection-hero{padding:142px 0 88px;min-height:720px;background:linear-gradient(135deg,#fbfaf6,#f4f6f6 62%,#f1e8d5);border-bottom:1px solid var(--line);overflow:hidden}
+.inspection-hero-layout{display:grid;grid-template-columns:1.12fr .88fr;gap:76px;align-items:center}
+.inspection-hero h1{margin:24px 0;font-size:clamp(52px,5.4vw,74px);line-height:.98;letter-spacing:-.055em}
+.inspection-hero h1 span,.inspection-heading h2 span{color:var(--orange)}
+.inspection-hero>div>div:first-child>p:not(.kicker):not(.lead){max-width:680px;color:var(--muted);font-size:15px;line-height:1.7}
+.inspection-actions{display:flex;gap:22px;align-items:center;margin-top:34px;font:700 10px "Courier New",monospace}
+.inspection-terminal{border:1px solid #b9c3c8;border-radius:12px;background:#ffffffcc;box-shadow:0 24px 60px #16334918;overflow:hidden}
+.inspection-flow{display:grid;padding:38px}
+.inspection-flow code{color:var(--orange);font:700 10px "Courier New",monospace}
+.inspection-flow b{margin-top:7px;font-size:19px}
+.inspection-flow i{margin:18px 0;color:var(--blue);font-style:normal}
+.inspection-flow small{margin-top:30px;padding-top:18px;border-top:1px solid var(--line);color:#4f8267;font:10px "Courier New",monospace}
+.inspection-intro{padding:88px 0;border-bottom:1px solid var(--line)}
+.inspection-split{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
+.inspection-split h2{margin:0;font-size:clamp(40px,4vw,60px);line-height:1.04;letter-spacing:-.045em}
+.inspection-split>div:last-child>p{margin:0 0 18px;color:var(--muted);font-size:16px;line-height:1.75}
+.inspection-heading{display:grid;grid-template-columns:1.15fr .85fr;gap:80px;align-items:end}
+.inspection-heading>p{margin:0;color:var(--muted);font-size:16px;line-height:1.75}
+.inspection-card-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:54px}
+.inspection-card-grid article{min-height:220px;padding:26px;border:1px solid var(--line);border-radius:9px;background:white}
+.inspection-card-grid b,.application-grid span{color:var(--orange);font:700 11px "Courier New",monospace}
+.inspection-card-grid h3{margin:40px 0 10px;font-size:18px}
+.inspection-card-grid p,.application-grid p,.inspection-steps p{margin:0;color:var(--muted);font-size:15px;line-height:1.65}
+.inspection-applications,.inspection-tech{background:#f4f6f6}
+.application-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:54px}
+.application-grid article{display:grid;grid-template-columns:42px 1fr;gap:18px;min-height:142px;padding:25px 27px;border:1px solid var(--line);border-radius:9px;background:white}
+.application-grid h3{margin:0 0 10px;font-size:18px}
+.inspection-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:24px;margin-top:55px}
+.inspection-steps>b{font:10px "Courier New",monospace}
+.inspection-steps article>b{color:var(--orange);font:700 11px "Courier New",monospace}
+.inspection-steps article>div{height:1px;margin:18px 0 26px;background:var(--line);position:relative}
+.inspection-steps article>div:before{content:"";position:absolute;width:7px;height:7px;top:-3px;border-radius:50%;background:var(--orange)}
+.inspection-steps h3{font-size:18px}
+.inspection-bridge{padding:78px 0;text-align:center;background:var(--cream);border-bottom:1px solid var(--line)}
+.inspection-bridge blockquote{max-width:880px;margin:24px auto 0;font-size:clamp(30px,4vw,52px);font-weight:700;line-height:1.08;letter-spacing:-.04em}
+.inspection-disclaimer{max-width:780px;margin:28px auto 0!important;font-size:13px!important;line-height:1.6!important}
+.inspection-footer{display:flex;justify-content:space-between;gap:24px;font:11px/1.7 "Courier New",monospace;color:#7c878d}
+
+@media(max-width:900px){
+  .inspection-feature-layout,.inspection-hero-layout,.inspection-split,.inspection-heading{grid-template-columns:1fr;gap:34px}
+  .inspection-header nav{display:flex}
+  .inspection-card-grid{grid-template-columns:repeat(2,1fr)}
+  .inspection-steps{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:680px){
+  .inspection-feature{padding:62px 0}
+  .inspection-feature-layout{gap:26px}
+  .inspection-header nav{display:none}
+  .inspection-hero{padding:126px 0 70px}
+  .inspection-hero h1{font-size:48px}
+  .inspection-actions{align-items:stretch;flex-direction:column}
+  .inspection-actions .btn,.inspection-actions .plain{width:100%;justify-content:space-between}
+  .inspection-card-grid,.application-grid,.inspection-steps{grid-template-columns:1fr}
+  .inspection-card-grid article{min-height:0}
+  .inspection-footer{flex-direction:column}
+}
 
 .about{padding:88px 0}
 .about-layout{gap:76px}
@@ -215,6 +292,13 @@ section[id]{scroll-margin-top:24px}
 }
 
 .service-grid article{padding-right:28px}
+.service-static,.service-link{display:block;height:100%;border-radius:8px}
+.service-static article,.service-link article{height:100%}
+.service-link article{cursor:pointer;transition:.2s}
+.service-link:hover article,.service-link:focus-visible article{transform:translateY(-3px);border-color:var(--blue);box-shadow:0 14px 35px #1633490d}
+.service-link:focus-visible{outline-offset:5px}
+.service-link small{position:absolute;left:52px;right:26px;bottom:14px;color:#56846c;font:700 9px "Courier New",monospace}
+.service-link article{padding-bottom:48px}
 .proposition,.operation,.technologies,.process-section{padding-top:88px;padding-bottom:88px}
 .proposition .value-cards,.operation .modules,.technologies .tech-grid,.process-section .steps{margin-top:52px}
 .cta{padding:88px 0}
@@ -276,7 +360,6 @@ section[id]{scroll-margin-top:24px}
 .experience-heading>p{margin:0;font-size:17px;line-height:1.75;color:var(--muted)}
 .experience-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:58px}
 .experience-grid article{min-height:210px;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:9px;background:white;overflow:hidden;transition:.2s}
-.experience-grid article:hover{transform:translateY(-3px);border-color:#315f7b77;box-shadow:0 14px 35px #1633490d}
 .experience-status{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px;min-height:42px;padding:10px 15px;background:#f3f5f5;border-bottom:1px solid var(--line);font:700 10px "Courier New",monospace}
 .experience-status span{color:var(--orange)}
 .experience-status code{color:var(--blue);font:inherit}
