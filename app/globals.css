@@ -132,8 +132,12 @@ button{font:inherit;color:inherit}
 .inspection-feature h2{margin:22px 0 0;font-size:clamp(38px,4vw,58px);line-height:1.03;letter-spacing:-.045em}
 .inspection-feature h2 span{color:#eda27f}
 .inspection-feature-copy>p{margin:0 0 28px;color:#dce5ea;font-size:16px;line-height:1.75}
-.inspection-feature .btn{background:var(--orange);border-color:var(--orange)}
-.inspection-feature .btn:hover{background:#bd5937;border-color:#bd5937}
+.equipment-paths{display:grid;gap:10px}
+.equipment-paths a{position:relative;display:grid;grid-template-columns:1fr auto;gap:6px 18px;align-items:center;min-height:72px;padding:14px 17px;border:1px solid #ffffff44;border-radius:5px;background:#ffffff0b;transition:.2s}
+.equipment-paths a:hover,.equipment-paths a:focus-visible{border-color:#eda27f;background:#ffffff15;transform:translateY(-2px)}
+.equipment-paths span{font:700 11px "Courier New",monospace;letter-spacing:.04em}
+.equipment-paths small{font:9px "Courier New",monospace;color:#bfcdd5}
+.equipment-paths b{grid-column:2;grid-row:1/3;color:#eda27f}
 
 /* Dedicated inspection page. */
 .inspection-page{background:var(--paper)}

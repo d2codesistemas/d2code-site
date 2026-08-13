@@ -320,15 +320,18 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="inspection-feature" aria-labelledby="inspecao-industrial-destaque">
+      <section className="inspection-feature" aria-labelledby="equipamentos-conectados-destaque">
         <div className="container inspection-feature-layout">
           <div>
-            <p className="kicker">SISTEMAS DE VISÃO // SOFTWARE &amp; INTEGRAÇÃO</p>
-            <h2 id="inspecao-industrial-destaque">Uma câmera identifica. <span>O software transforma o resultado em processo.</span></h2>
+            <p className="kicker">EQUIPAMENTOS CONECTADOS // SOFTWARE &amp; INTEGRAÇÃO</p>
+            <h2 id="equipamentos-conectados-destaque">Câmeras identificam. Impressoras marcam. <span>O software coordena o processo.</span></h2>
           </div>
           <div className="inspection-feature-copy">
-            <p>Integramos câmeras e sistemas de visão — inclusive equipamentos com recursos de IA — à lógica da operação: receitas, critérios, resultados OK/NOK, rastreabilidade, alarmes, bloqueios e comunicação com os demais sistemas.</p>
-            <a className="btn" href="/inspecao-industrial/" onClick={() => trackClarityEvent("cta_inspecao")}>VER INTEGRAÇÃO DE VISÃO <b>→</b></a>
+            <p>A D2 integra câmeras, sistemas de visão, leitores, impressoras industriais, marcadores, CLPs e sistemas internos. Conectamos receitas, resultados OK/NOK, dados variáveis, impressão, alarmes e rastreabilidade ao mesmo fluxo operacional.</p>
+            <div className="equipment-paths">
+              <a href="/inspecao-industrial/" onClick={() => trackClarityEvent("cta_inspecao")}><span>SISTEMAS DE VISÃO</span><small>INSPEÇÃO, OK/NOK E AÇÕES DE LINHA</small><b>→</b></a>
+              <a href="#experiencia" onClick={() => trackClarityEvent("card_solucao")}><span>IMPRESSÃO &amp; SERIALIZAÇÃO</span><small>ZEBRA, VIDEOJET, SATO E DADOS VARIÁVEIS</small><b>↓</b></a>
+            </div>
           </div>
         </div>
       </section>
