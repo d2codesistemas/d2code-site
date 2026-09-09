@@ -183,7 +183,7 @@ export default function Home() {
           <a href="#experiencia" onClick={closeMenu}>EXPERIÊNCIA</a>
           <a href="#sobre" onClick={closeMenu}>SOBRE</a>
           <a href="#processo" onClick={closeMenu}>PROCESSO</a>
-          <a className="contact-link" href="#contato" onClick={() => { trackClarityEvent("whatsapp_contato"); closeMenu(); }}>[ FALE COM A D2 ]</a>
+          <a className="contact-link" href="#contato" onClick={() => { trackClarityEvent("cta_conversa"); closeMenu(); }}>[ FALE COM A D2 ]</a>
         </nav>
       </header>
 
@@ -201,7 +201,7 @@ export default function Home() {
               <p><strong>D2 CODE</strong><span>SISTEMAS SOB MEDIDA<br />ATIBAIA · SP</span></p>
             </div>
             <div className="actions">
-              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Iniciar uma conversa com a D2 Code pelo WhatsApp" onClick={() => trackClarityEvent("cta_conversa")}>INICIAR UMA CONVERSA <b>→</b></a>
+              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Iniciar uma conversa com a D2 Code pelo WhatsApp" onClick={() => { trackClarityEvent("cta_conversa"); trackClarityEvent("whatsapp_contato"); }}>INICIAR UMA CONVERSA <b>→</b></a>
               <a className="plain" href="#servicos" onClick={() => trackClarityEvent("ver_servicos")}>CONHECER AS SOLUÇÕES <b>↓</b></a>
             </div>
             <div className="status"><span>● D2 CODE ONLINE</span><span>ATIBAIA — SP · BRASIL</span></div>
