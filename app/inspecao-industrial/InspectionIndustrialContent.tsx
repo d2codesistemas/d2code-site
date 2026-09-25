@@ -175,7 +175,7 @@ export default function InspectionIndustrialContent() {
       <section className="section inspection-tech">
         <div className="container inspection-split">
           <div><div className="section-label inverse">07 / TECNOLOGIAS &amp; EQUIPAMENTOS</div><h2>Experiência de integração, sem dependência de uma única marca.</h2></div>
-          <div><p>A D2 Code possui experiência na integração de soluções Keyence, Hikvision, Cognex, Videojet, Zebra e Sato, além de CLPs, leitores industriais, impressoras, bancos de dados, APIs, ERPs e sistemas internos.</p><p>Keyence e Hikvision indicam a D2 para projetos de integração no Brasil. A D2 atua como integradora de software e processo; não se apresenta como fabricante das câmeras nem limita a arquitetura a uma única marca.</p></div>
+          <div><p>A D2 Code possui experiência na integração de soluções Keyence, Hikvision, Cognex, Videojet, Zebra e Sato, além de CLPs, leitores industriais, impressoras, bancos de dados, APIs, ERPs e sistemas internos.</p><p>Atua na camada de software e processo, conectando os resultados dos equipamentos ao fluxo operacional, sem depender de uma única marca.</p></div>
         </div>
       </section>
 
