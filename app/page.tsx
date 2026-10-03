@@ -3,475 +3,119 @@
 import { useState } from "react";
 import Image from "next/image";
 import { trackClarityEvent } from "./clarity";
+import styles from "./home-preview.module.css";
 
-const WHATSAPP =
-  "https://wa.me/5511950263057?text=Olá%2C%20Diego!%20Gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa.";
-const BOOKINGS =
-  "https://outlook.office.com/bookwithme/user/7e13239b8ae54948829532ecc6f73f20@d2code.com.br/meetingtype/FCKJ91NRhE2z8E1pRqqKiQ2?anonymous&ismsaljsauthenabled";
+const WHATSAPP = "https://wa.me/5511950263057?text=Olá%2C%20Diego!%20Gostaria%20de%20conversar%20sobre%20um%20projeto%20para%20minha%20empresa.";
+const BOOKINGS = "https://outlook.office.com/bookwithme/user/7e13239b8ae54948829532ecc6f73f20@d2code.com.br/meetingtype/FCKJ91NRhE2z8E1pRqqKiQ2?anonymous&ismsaljsauthenabled";
 
-const services = [
-  { number: "01", id: "sistemas-sob-medida", title: "Sistemas sob medida", description: "Aplicações web, desktop e serviços desenvolvidos para a realidade do seu negócio." },
-  { number: "02", id: "integracoes-industriais", title: "Integrações industriais", description: "Câmeras, leitores, impressoras, CLPs, RFID, ERPs, APIs e bancos de dados trabalhando no mesmo fluxo." },
-  { number: "03", id: "automacao-processos", title: "Automação de processos", description: "Menos tarefas manuais, menos retrabalho e mais controle sobre a operação." },
-  { number: "04", id: "inspecao-qualidade", title: "Inspeção & qualidade", description: "Integração de câmeras e sistemas de visão — inclusive com IA embarcada — às regras, registros e ações do processo.", href: "#experiencia-inspecao" },
-  { number: "05", id: "dados-rastreabilidade", title: "Dados & rastreabilidade", description: "Controle de lotes, seriais, produção, movimentações e histórico operacional." },
-  { number: "06", id: "evolucao-sistemas", title: "Evolução de sistemas", description: "Modernização e continuidade para soluções que já fazem parte da empresa." },
+const method = [
+  ["Capturar", "Receber códigos, medições e resultados de equipamentos."],
+  ["Validar", "Conferir os dados com as regras e o contexto da operação."],
+  ["Agir", "Liberar, alertar, bloquear ou comandar, conforme a solução definida."],
+  ["Registrar", "Guardar eventos, resultados e ocorrências para consulta."],
+  ["Integrar", "Trocar dados com o ERP e outros sistemas."],
+];
+const implementation = [
+  ["Entender", "Mapear o fluxo, as dificuldades e o resultado esperado."],
+  ["Desenhar", "Definir regras, integrações e o primeiro escopo."],
+  ["Construir", "Desenvolver em ciclos curtos, com validações frequentes."],
+  ["Implantar", "Testar no contexto da operação e preparar a entrada em uso."],
+  ["Acompanhar", "Verificar o funcionamento inicial e orientar os ajustes previstos no escopo."],
+];
+const applications = [
+  { title: "O código lido corresponde ao produto da ordem?", text: "Comparar a leitura com a ordem e o produto esperado. Quando houver divergência, aplicar a ação definida e registrar a ocorrência.", flow: ["Leitura", "Ordem / produto", "Validação", "Ação"], symbol: "01" },
+  { title: "A impressão está coerente com o que está sendo produzido?", text: "Usar os dados da ordem e as regras do processo para preparar a impressão. Ao identificar uma inconsistência, alertar, bloquear ou comandar a ação prevista e registrar o evento.", flow: ["Ordem / impressão", "Verificação", "Ação", "Registro"], symbol: "02" },
+  { title: "É possível relacionar unidade, lote, serial e caixa?", text: "Associar identificações e eventos ao longo do fluxo para consultar a origem e o destino do produto e trocar informações com o ERP ou sistema da empresa.", flow: ["Unidade", "Lote / serial", "Caixa", "Sistema"], symbol: "03" },
+];
+const demos = [
+  { title: "Captura e rastreabilidade", text: "Códigos lidos pela câmera, recebidos e validados pelo sistema, com registro e impressão automática da etiqueta.", src: "/videos/captura-rastreabilidade.mp4", poster: "/videos/captura-rastreabilidade.jpg", tag: "CAPTURA → REGISTRO → IMPRESSÃO" },
+  { title: "Integração com Videojet", text: "Dados da ordem e do lote enviados pelo sistema ao equipamento, reduzindo a necessidade de digitação.", src: "/videos/integracao-videojet.mp4", poster: "/videos/integracao-videojet.jpg", tag: "ORDEM → SISTEMA → EQUIPAMENTO" },
 ];
 
-const operationAreas = [
-  { code: "GES", title: "GESTÃO E PROCESSOS", description: "Sistemas internos, aprovações, indicadores e controle operacional.", href: "#sistemas-sob-medida" },
-  { code: "INT", title: "INTEGRAÇÃO DE SISTEMAS", description: "ERPs, APIs, bancos de dados e sistemas legados conectados.", href: "#integracoes-industriais", featured: true },
-  { code: "AUT", title: "AUTOMAÇÃO INDUSTRIAL", description: "Equipamentos, produção, impressão, leitura e controle de linha.", href: "#automacao-processos" },
-  { code: "TRC", title: "RASTREABILIDADE E QUALIDADE", description: "Controle por lote, serial, inspeção, rejeição e histórico completo.", href: "#dados-rastreabilidade" },
-];
-
-const solutions = [
-  ["01", "Rastreabilidade industrial", "Controle de ordens, lotes, seriais, produção, refugo e qualidade."],
-  ["02", "Integração com equipamentos", "Comunicação com câmeras, leitores, impressoras, CLPs e dispositivos de identificação."],
-  ["03", "Inspeção automática", "Resultados de câmeras e sistemas de visão conectados a receitas, OK/NOK, rastreabilidade e ações de linha.", "#experiencia-inspecao"],
-  ["04", "Impressão e serialização", "Geração, envio e controle de dados variáveis para impressoras industriais e etiquetas."],
-  ["05", "RFID e identificação", "Leitura, gravação e rastreamento de produtos, embalagens e movimentações."],
-  ["06", "Modernização de sistemas", "Evolução de aplicações legadas sem interromper operações já consolidadas."],
-];
-
-const appliedExperience = [
-  {
-    code: "OP→PRINT",
-    id: "experiencia-impressao",
-    title: "Integração de produção e impressão",
-    description:
-      "Sistemas que recebem dados da ordem de produção e configuram automaticamente impressoras e datadores, reduzindo operações manuais e inconsistências.",
-  },
-  {
-    code: "VISION.OK",
-    id: "experiencia-inspecao",
-    title: "Inspeção e validação automática",
-    description:
-      "Soluções com câmeras e leitores para conferir códigos, dados variáveis, presença, posicionamento, aparência e conformidade do produto.",
-  },
-  {
-    code: "TRACE.ID",
-    id: "experiencia-rastreabilidade",
-    title: "Rastreabilidade e códigos únicos",
-    description:
-      "Controle de lotes, seriais, QR Codes, pharmacodes e códigos promocionais, com registro completo das leituras e ocorrências.",
-  },
-  {
-    code: "LOG.DATA",
-    id: "experiencia-dados",
-    title: "Relatórios e histórico operacional",
-    description:
-      "Armazenamento das informações de produção, inspeção e rejeição, com consultas e relatórios personalizados.",
-  },
-];
-
-const operationVideos = [
-  {
-    code: "VISION.KEYENCE",
-    title: "Inspeção com sistema de visão",
-    description: "O equipamento executa a análise; o software integra o resultado, a receita e as ações necessárias ao fluxo da operação.",
-    src: "/videos/visao-keyence-contagem-roda.mp4",
-    poster: "/videos/visao-keyence-contagem-roda.jpg",
-  },
-  {
-    code: "CAPTURE.TRACE",
-    title: "Captura e rastreabilidade",
-    description: "Códigos capturados, validados e registrados pelo sistema antes da impressão automática da etiqueta.",
-    src: "/videos/captura-rastreabilidade.mp4",
-    poster: "/videos/captura-rastreabilidade.jpg",
-  },
-  {
-    code: "PRINT.ZEBRA",
-    title: "Impressão industrial com Zebra",
-    description: "Seleção da ordem, geração do conteúdo e preparação dos dados para impressão industrial.",
-    src: "/videos/impressao-zebra.mp4",
-    poster: "/videos/impressao-zebra.jpg",
-  },
-  {
-    code: "DEVICE.VIDEOJET",
-    title: "Integração direta com Videojet",
-    description: "Dados da ordem e do lote enviados pelo sistema ao equipamento, sem digitação manual.",
-    src: "/videos/integracao-videojet.mp4",
-    poster: "/videos/integracao-videojet.jpg",
-  },
-];
-
-const technologies = [
-  "C# e .NET",
-  "Delphi",
-  "SQL Server",
-  "PostgreSQL",
-  "Firebird",
-  "Serviços Windows",
-  "APIs REST",
-  "Modbus TCP",
-  "Zebra",
-  "Keyence",
-  "Hikvision",
-  "Cognex",
-  "Videojet",
-  "Sato",
-  "RFID",
-  "Leitores industriais",
-  "Impressoras industriais",
-  "Câmeras e visão computacional",
-];
-
-const steps = [
-  ["01", "Entender", "Mapeamos a operação, os riscos, as necessidades e o resultado esperado."],
-  ["02", "Projetar", "Desenhamos a solução, as integrações e um escopo claro."],
-  ["03", "Construir", "Desenvolvemos em ciclos curtos, com validações frequentes."],
-  ["04", "Implantar", "Colocamos a solução em operação com testes, documentação e acompanhamento."],
-];
-
-function Logo({ compact = false }: { compact?: boolean }) {
-  return (
-    <Image
-      className={compact ? "logo compact" : "logo"}
-      src="/d2code-logo.png"
-      alt="D2 Code Sistemas"
-      width={1024}
-      height={1024}
-      unoptimized
-      priority={compact}
-    />
-  );
+function Logo() {
+  return <Image src="/d2code-logo.png" alt="D2 Code Sistemas" width={1024} height={1024} className="logo compact" unoptimized priority />;
 }
-
-function SectionContact({ text }: { text: string }) {
-  return (
-    <aside className="section-contact" aria-label="Entre em contato com a D2 Code">
-      <div className="container section-contact-layout">
-        <p><span>◆</span>{text}</p>
-        <div className="section-contact-actions">
-          <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>
-            FALAR PELO WHATSAPP <b>→</b>
-          </a>
-          <a href={BOOKINGS} target="_blank" rel="noreferrer">
-            AGENDAR CONVERSA <b>↗</b>
-          </a>
-        </div>
-      </div>
-    </aside>
-  );
+function Heading({ label, title, subtitle }: { label: string; title: string; subtitle?: string }) {
+  return <div className="hp-heading"><p className="hp-label">{label}</p><h2>{title}</h2>{subtitle && <p className="hp-subtitle">{subtitle}</p>}</div>;
+}
+function WhatsApp({ children, hero = false }: { children: React.ReactNode; hero?: boolean }) {
+  return <a className="hp-button" href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => { if (hero) trackClarityEvent("cta_conversa"); trackClarityEvent("whatsapp_contato"); }}>{children}<span aria-hidden="true">↗</span></a>;
+}
+function Steps({ items }: { items: string[][] }) {
+  return <ol className="hp-steps">{items.map(([title, text], index) => <li key={title}><span className="hp-number">0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol>;
 }
 
 export default function Home() {
   const [menu, setMenu] = useState(false);
-  const closeMenu = () => setMenu(false);
-
-  return (
-    <main>
-      <header>
-        <a href="#inicio" aria-label="D2 Code — início" onClick={closeMenu}>
-          <Logo compact />
-        </a>
-        <button
-          className="menu"
-          onClick={() => setMenu(!menu)}
-          aria-label={menu ? "Fechar menu" : "Abrir menu"}
-          aria-expanded={menu}
-          aria-controls="menu-principal"
-        >
-          <span />
-          <span />
-        </button>
-        <nav id="menu-principal" className={menu ? "open" : ""} aria-label="Navegação principal">
-          <a href="#servicos" onClick={closeMenu}>SERVIÇOS</a>
-          <a href="#atuacao" onClick={closeMenu}>ATUAÇÃO</a>
-          <a href="#solucoes" onClick={closeMenu}>SOLUÇÕES</a>
-          <a href="#experiencia" onClick={closeMenu}>EXPERIÊNCIA</a>
-          <a href="#sobre" onClick={closeMenu}>SOBRE</a>
-          <a href="#processo" onClick={closeMenu}>PROCESSO</a>
-          <a className="contact-link" href="#contato" onClick={() => { trackClarityEvent("cta_conversa"); closeMenu(); }}>[ FALE COM A D2 ]</a>
-        </nav>
-      </header>
-
-      <section className="hero" id="inicio">
-        <div className="container hero-layout">
-          <div className="hero-copy">
-            <p className="kicker">D2_CODE // SOFTWARE &amp; AUTOMAÇÃO</p>
-            <h1>
-              Software sob medida<span className="desktop-break"><br /></span>{" "}
-              para <span>operações que<span className="desktop-break"><br /></span>{" "}não podem parar.</span>
-            </h1>
-            <p className="lead">Desenvolvemos sistemas, integrações e automações para conectar processos, equipamentos e dados — da gestão ao chão de fábrica.</p>
-            <div className="mobile-signature">
-              <Logo />
-              <p><strong>D2 CODE</strong><span>SISTEMAS SOB MEDIDA<br />ATIBAIA · SP</span></p>
-            </div>
-            <div className="actions">
-              <a className="btn" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Iniciar uma conversa com a D2 Code pelo WhatsApp" onClick={() => { trackClarityEvent("cta_conversa"); trackClarityEvent("whatsapp_contato"); }}>INICIAR UMA CONVERSA <b>→</b></a>
-              <a className="plain" href="#servicos" onClick={() => trackClarityEvent("ver_servicos")}>CONHECER AS SOLUÇÕES <b>↓</b></a>
-            </div>
-            <div className="status"><span>● D2 CODE ONLINE</span><span>ATIBAIA — SP · BRASIL</span></div>
-          </div>
-          <div className="hero-brand" aria-hidden="true">
-            <div className="window">
-              <div className="titlebar">
-                <span>D2CODE.EXE</span>
-                <div className="window-controls" aria-hidden="true">
-                  <i>−</i>
-                  <i>□</i>
-                  <i>×</i>
-                </div>
-              </div>
-              <div className="window-body">
-                <Logo />
-                <div className="boot">
-                  <p>C:\D2CODE&gt; CONNECT_OPERATION</p>
-                  <p>LINKING SYSTEMS, DEVICES &amp; DATA...</p>
-                  <p className="ok">[ OK ] READY FOR PRODUCTION_</p>
-                </div>
-              </div>
-            </div>
-            <div className="stamp">FUNDADA<br /><strong>2025</strong></div>
-          </div>
+  const [playing, setPlaying] = useState<string | null>(null);
+  const close = () => setMenu(false);
+  return <main className={styles.preview}>
+    <header className="hp-header">
+      <a href="#inicio" aria-label="D2 Code — início" onClick={close}><Logo /></a>
+      <button className="hp-menu" type="button" aria-label={menu ? "Fechar menu" : "Abrir menu"} aria-expanded={menu} aria-controls="menu-principal" onClick={() => setMenu(!menu)}><span /><span /></button>
+      <nav id="menu-principal" className={menu ? "hp-open" : ""} aria-label="Navegação principal">
+        <a href="#aplicacoes" onClick={close}>Aplicações</a><a href="#experiencia" onClick={close}>Experiência</a><a href="#implantacao" onClick={close}>Implantação</a><a href="#sobre" onClick={close}>Sobre</a>
+        <a className="hp-nav-contact" href="#contato" onClick={() => { trackClarityEvent("cta_conversa"); close(); }}>Falar com a D2 ↗</a>
+      </nav>
+    </header>
+    <section className="hp-hero" id="inicio">
+      <div className="container hp-hero-grid">
+        <div><p className="hp-label">INTEGRAÇÃO ENTRE EQUIPAMENTOS, PROCESSO E SISTEMAS</p>
+          <h1>Menos conferência manual.<br /><span>Mais controle entre equipamento e sistemas.</span></h1>
+          <p className="hp-lead">Conectamos equipamentos, regras do processo e sistemas para reduzir digitação, erros e retrabalho.</p>
+          <div className="hp-actions"><WhatsApp hero>Falar sobre minha operação</WhatsApp><a className="hp-text-link" href="#aplicacoes" onClick={() => trackClarityEvent("ver_servicos")}>Ver aplicações <span aria-hidden="true">↓</span></a></div>
         </div>
-        <div className="ticker" aria-label="Áreas de atuação">
-          <div className="ticker-track">
-            <span>SOFTWARE SOB MEDIDA ◆ AUTOMAÇÃO INDUSTRIAL ◆ RASTREABILIDADE ◆ INSPEÇÃO &amp; QUALIDADE ◆ INTEGRAÇÃO COM EQUIPAMENTOS ◆ MODERNIZAÇÃO DE SISTEMAS ◆</span>
-            <span aria-hidden="true">SOFTWARE SOB MEDIDA ◆ AUTOMAÇÃO INDUSTRIAL ◆ RASTREABILIDADE ◆ INSPEÇÃO &amp; QUALIDADE ◆ INTEGRAÇÃO COM EQUIPAMENTOS ◆ MODERNIZAÇÃO DE SISTEMAS ◆</span>
-          </div>
+        <div className="hp-hero-diagram" aria-label="Equipamento conectado nos dois sentidos ao software D2 e suas regras, conectado ao ERP e sistemas">
+          <p className="hp-diagram-label">ONDE A D2 ENTRA</p>
+          <div className="hp-mini-node"><span className="hp-node-icon" aria-hidden="true">▥</span><strong>EQUIPAMENTO</strong><small>Leituras · eventos · comandos</small></div>
+          <div className="hp-connector" aria-hidden="true">↕</div>
+          <div className="hp-mini-node hp-d2-node"><span className="hp-chip">D2 CODE</span><strong>SOFTWARE D2 + REGRAS</strong><small>Validar · agir · registrar</small></div>
+          <div className="hp-connector" aria-hidden="true">↕</div>
+          <div className="hp-mini-node"><span className="hp-node-icon" aria-hidden="true">▤</span><strong>ERP / SISTEMAS</strong><small>Contexto · dados · histórico</small></div>
         </div>
-      </section>
-
-      <section className="section proposition">
-        <div className="container">
-          <div className="section-label">01 / NOSSA PROPOSTA</div>
-          <div className="big-copy">
-            <h2>Não vendemos uma caixa fechada.<br /><span>Construímos o encaixe certo.</span></h2>
-            <p>Cada projeto começa pelo desafio, não pela tecnologia. Entendemos o contexto, conectamos o que já existe e desenvolvemos uma solução que faça sentido para a operação, para as pessoas e para os objetivos da empresa.</p>
-          </div>
-          <div className="value-cards">
-            {[
-              ["ENTENDIMENTO", "Começamos pelas pessoas, pelos objetivos e pela realidade do processo."],
-              ["CONEXÃO", "Integramos sistemas, equipamentos, plataformas e dados no mesmo fluxo de informação."],
-              ["CONFIANÇA", "Criamos soluções claras, sustentáveis e preparadas para evoluir com a empresa."],
-            ].map((value, index) => (
-              <article key={value[0]}>
-                <span>0{index + 1}</span>
-                <div><h3>{value[0]}</h3><p>{value[1]}</p></div>
-              </article>
-            ))}
-          </div>
+      </div>
+    </section>
+    <section className="hp-section hp-role" id="papel">
+      <div className="container">
+        <Heading label="01 / O PAPEL DA D2" title="Entre o equipamento e o sistema, as regras da sua operação." subtitle="Conectamos o que acontece na linha ao contexto que a empresa precisa para decidir e registrar." />
+        <div className="hp-role-grid">
+          <article><span className="hp-label">EQUIPAMENTO</span><h3>O que acontece na operação.</h3><p>Gera leituras, resultados e eventos; também pode receber dados e comandos.</p></article>
+          <span className="hp-role-arrow" aria-hidden="true">↔</span>
+          <article className="hp-role-d2"><span className="hp-label">SOFTWARE D2 + REGRAS</span><h3>A informação vira ação.</h3><p>Usa o contexto da operação para validar informações, definir ações e registrar ocorrências.</p></article>
+          <span className="hp-role-arrow" aria-hidden="true">↔</span>
+          <article><span className="hp-label">ERP / SISTEMAS</span><h3>O contexto da empresa.</h3><p>Fornecem ordens, produtos e lotes; recebem os registros e resultados combinados no projeto.</p></article>
         </div>
-      </section>
-      <SectionContact text="Tem um desafio que não cabe em uma solução pronta?" />
-
-      <section className="section services" id="servicos">
-        <div className="container">
-          <div className="section-label inverse">02 / O QUE FAZEMOS</div>
-          <div className="service-head">
-            <h2>Da necessidade à<br /><span>solução em produção.</span></h2>
-            <div className="cursor" aria-hidden="true">_</div>
-          </div>
-          <div className="service-grid">
-            {services.map((service) => {
-              const content = <article id={service.id}><b>{service.number}</b><h3>{service.title}</h3><p>{service.description}</p>{service.href && <small>CONHECER ESTA SOLUÇÃO →</small>}</article>;
-              return service.href ? <a className="service-link" href={service.href} key={service.number} onClick={() => trackClarityEvent("cta_inspecao")} aria-label={`${service.title}: conhecer a solução`}>{content}</a> : <div className="service-static" key={service.number}>{content}</div>;
-            })}
-          </div>
-        </div>
-      </section>
-      <SectionContact text="Quer entender qual solução faz sentido para a sua operação?" />
-
-      <section className="section operation" id="atuacao">
-        <div className="container">
-          <div className="section-label">03 / ONDE ATUAMOS</div>
-          <h2>Da gestão ao chão de fábrica, com <span>controle de ponta a ponta.</span></h2>
-          <div className="modules">
-            {operationAreas.map((area) => (
-              <a
-                className={`module-link${area.featured ? " featured" : ""}`}
-                href={area.href}
-                key={area.code}
-                aria-label={`${area.title}: ver detalhes em O que fazemos`}
-                onClick={() => trackClarityEvent("card_atuacao")}
-              >
-                <article>
-                  <div className="module-title">
-                    <span>{area.code}</span>
-                    <i aria-hidden="true">{area.featured ? "DESTAQUE ↘" : "ABRIR ↘"}</i>
-                  </div>
-                  <div><h3>{area.title}</h3><p>{area.description}</p></div>
-                  <small>VER DETALHES →</small>
-                </article>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-      <SectionContact text="Precisa conectar sistemas, equipamentos e dados?" />
-
-      <section className="section field-solutions" id="solucoes">
-        <div className="container">
-          <div className="section-label">04 / SOLUÇÕES EM OPERAÇÃO</div>
-          <div className="solutions-heading">
-            <h2>Soluções que colocamos <span>em operação.</span></h2>
-            <p>Desenvolvemos tecnologia para resolver desafios reais de produção, integração, controle e rastreabilidade.</p>
-          </div>
-          <div className="solution-grid">
-            {solutions.map((solution) => (
-              <a
-                className="solution-link"
-                href={solution[3] ?? "#contato"}
-                key={solution[0]}
-                aria-label={`${solution[1]}: conversar com a D2 Code`}
-                onClick={() => trackClarityEvent("card_solucao")}
-              >
-                <article>
-                  <span>{solution[0]}</span>
-                  <div><h3>{solution[1]}</h3><p>{solution[2]}</p></div>
-                  <small>CONVERSAR SOBRE ESTA SOLUÇÃO →</small>
-                </article>
-              </a>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section applied-experience" id="experiencia" aria-labelledby="experiencia-aplicada">
-        <div className="container">
-          <div className="section-label">05 / EXPERIÊNCIA APLICADA</div>
-          <div className="experience-heading">
-            <h2 id="experiencia-aplicada">Experiência construída <span>em operação.</span></h2>
-            <p>Antes mesmo da fundação da D2 Code, seu responsável técnico já desenvolvia e implantava sistemas para ambientes industriais e operações críticas. Essa experiência prática hoje orienta as soluções entregues pela empresa.</p>
-          </div>
-          <div className="experience-grid">
-            {appliedExperience.map((experience, index) => (
-              <article key={experience.code} id={experience.id}>
-                <div className="experience-status">
-                  <span>{String(index + 1).padStart(2, "0")}</span>
-                  <code>{experience.code}</code>
-                  <i aria-hidden="true">[ OK ]</i>
-                </div>
-                <div>
-                  <h3>{experience.title}</h3>
-                  <p>{experience.description}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-          <p className="experience-note">Exemplos apresentados de forma anônima, sem identificação de clientes ou exposição de informações operacionais.</p>
-          <div className="video-showcase" aria-labelledby="tecnologia-em-operacao">
-            <div className="video-showcase-heading">
-              <p className="kicker">REAL_OPERATION.D2C</p>
-              <h3 id="tecnologia-em-operacao">Tecnologia em operação.</h3>
-              <p>Fluxos reais que conectam software, dados e equipamentos no dia a dia da produção.</p>
-            </div>
-            <div className="video-grid">
-              {operationVideos.map((video, index) => (
-                <article key={video.code}>
-                  <div className="video-frame">
-                    <video
-                      controls
-                      playsInline
-                      preload="metadata"
-                      poster={video.poster}
-                      aria-label={`${video.title}: demonstração em vídeo`}
-                    >
-                      <source src={video.src} type="video/mp4" />
-                      Seu navegador não suporta a reprodução deste vídeo.
-                    </video>
-                    <span aria-hidden="true">0{index + 1}</span>
-                  </div>
-                  <code>{video.code}</code>
-                  <h4>{video.title}</h4>
-                  <p>{video.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-      <SectionContact text="Existe um processo que precisa de mais controle ou rastreabilidade?" />
-
-      <section className="section about" id="sobre">
-        <div className="container about-layout">
-          <div className="poster">
-            <Logo />
-            <blockquote>Tecnologia boa não aparece como complicação. Aparece como processo funcionando.</blockquote>
-            <div className="poster-lines">DESIGN / DEVELOPMENT / INTEGRATION<br />ATIBAIA — SP</div>
-          </div>
-          <div className="about-copy">
-            <div className="section-label inverse">06 / SOBRE A D2 CODE</div>
-            <h2>Experiência técnica.<br /><span>Visão de negócio.</span></h2>
-            <p>A D2 Code é uma empresa de Atibaia especializada em software sob medida, integrações e automação de processos.</p>
-            <p>Nascemos em 2025, reunindo anos de experiência prática em ambientes industriais, sistemas críticos e operações que exigem confiabilidade. Desenvolvemos soluções que conectam pessoas, processos, dados e equipamentos, respeitando a realidade de cada cliente.</p>
-            <p>Nosso compromisso é entregar tecnologia clara, sustentável e útil no dia a dia — sem tentar encaixar problemas específicos em ferramentas genéricas.</p>
-            <div className="facts">
-              <b>2025<small>FUNDAÇÃO</small></b>
-              <b>ATIBAIA · SP<small>BASE</small></b>
-              <b>SOB MEDIDA<small>MODELO</small></b>
-              <b>OPERAÇÕES CRÍTICAS<small>ESPECIALIDADE</small></b>
-            </div>
-          </div>
-        </div>
-      </section>
-      <SectionContact text="Vamos conversar sobre a realidade da sua empresa?" />
-
-      <section className="section technologies" id="tecnologias">
-        <div className="container">
-          <div className="section-label">07 / TECNOLOGIAS &amp; INTEGRAÇÕES</div>
-          <h2>Tecnologias e equipamentos com os quais trabalhamos.</h2>
-          <div className="tech-grid">
-            {technologies.map((technology, index) => (
-              <span key={technology}><b>{String(index + 1).padStart(2, "0")}</b>{technology}</span>
-            ))}
-          </div>
-        </div>
-      </section>
-      <SectionContact text="Tem uma integração ou sistema legado para evoluir?" />
-
-      <section className="section process-section" id="processo">
-        <div className="container">
-          <div className="section-label">08 / COMO TRABALHAMOS</div>
-          <h2>Do diagnóstico à entrada em operação.</h2>
-          <div className="steps">
-            {steps.map((step) => (
-              <article key={step[0]}>
-                <b>{step[0]}</b><div className="step-line" /><h3>{step[1]}</h3><p>{step[2]}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="cta" id="contato">
-        <div className="container">
-          <p className="kicker">NEW_PROJECT.D2C</p>
-          <h2>Existe um jeito melhor de fazer?</h2>
-          <p>Conte o desafio. A gente transforma complexidade em software que funciona.</p>
-          <div className="contact-options">
-            <a className="btn booking" href={BOOKINGS} target="_blank" rel="noreferrer" aria-label="Abrir a agenda online da D2 Code">ABRIR AGENDA ONLINE <b>↗</b></a>
-            <a className="btn light" href={WHATSAPP} target="_blank" rel="noreferrer" aria-label="Falar com a D2 Code pelo WhatsApp" onClick={() => trackClarityEvent("whatsapp_contato")}>FALAR PELO WHATSAPP <b>↗</b></a>
-          </div>
-          <address className="contact-details">
-            <strong>Diego Carvalho</strong>
-            <span>Fundador e responsável técnico</span>
-            <a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a>
-          </address>
-        </div>
-      </section>
-
-      <footer>
-        <div className="container footer-top">
-          <Logo compact />
-          <p>D2 CODE SISTEMAS LTDA.<br />ATIBAIA — SP</p>
-          <div>
-            <a href="mailto:diego.carvalho@d2code.com.br">E-MAIL ↗</a>
-            <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>WHATSAPP ↗</a>
-            <a href="https://www.linkedin.com/company/d2code" target="_blank" rel="noreferrer">LINKEDIN ↗</a>
-          </div>
-        </div>
-        <div className="container footer-bottom">
-          <span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span>
-          <span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a> · <a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a></span>
-          <span><a href="/privacidade/">PRIVACIDADE</a> · <a href="#inicio">VOLTAR AO TOPO ↑</a></span>
-        </div>
-      </footer>
-    </main>
-  );
+        <p className="hp-infrastructure"><span aria-hidden="true">↳</span>Avaliamos o que pode ser aproveitado da infraestrutura existente antes de propor novas integrações ou substituições.</p>
+      </div>
+    </section>
+    <section className="hp-section hp-method" id="metodo"><div className="container">
+      <Heading label="02 / DO DADO À AÇÃO" title="Capturar. Validar. Agir. Registrar. Integrar." subtitle="A informação precisa chegar à ação certa e deixar um histórico útil." />
+      <Steps items={method} /><p className="hp-note">O fluxo é definido conforme o processo e os recursos disponíveis.</p>
+    </div></section>
+    <section className="hp-section" id="aplicacoes"><div className="container">
+      <Heading label="03 / PROBLEMAS QUE PODEMOS TRATAR" title="Três situações em que a integração faz diferença." subtitle="Exemplos de aplicação. As regras e ações são definidas para cada operação." />
+      <div className="hp-applications">{applications.map(app => <article key={app.symbol}><span className="hp-number">{app.symbol}</span><h3>{app.title}</h3><p>{app.text}</p><ol className="hp-flow" aria-label="Fluxo da aplicação">{app.flow.map(item => <li key={item}>{item}</li>)}</ol></article>)}</div>
+      <div className="hp-section-action"><WhatsApp>Tenho um desafio parecido</WhatsApp></div>
+    </div></section>
+    <section className="hp-section hp-proof" id="experiencia"><div className="container">
+      <Heading label="04 / EXPERIÊNCIA APLICADA" title="Software, dados e equipamentos trabalhando no mesmo fluxo." subtitle="Demonstrações ajudam a visualizar como regras, registros e ações se conectam na operação." />
+      <div className="hp-demos">{demos.map(demo => <article key={demo.src}>
+        <div className="hp-media">{playing === demo.src ? <video controls playsInline autoPlay preload="metadata" poster={demo.poster} aria-label={demo.title}><source src={demo.src} type="video/mp4" />Seu navegador não suporta a reprodução deste vídeo.</video> : <button type="button" className="hp-play" onClick={() => setPlaying(demo.src)} aria-label={"Reproduzir " + demo.title}><span className="hp-poster-photo"><Image src={demo.poster} alt="" width={720} height={1280} unoptimized /></span><span className="hp-poster-copy"><span className="hp-poster-label">DEMONSTRAÇÃO</span><strong>{demo.title}</strong><span className="hp-poster-action"><span className="hp-play-icon" aria-hidden="true">▶</span><span>Reproduzir vídeo</span></span></span></button>}</div>
+        <p className="hp-label hp-demo-tag">{demo.tag}</p><h3>{demo.title}</h3><p>{demo.text}</p>
+      </article>)}</div>
+      <div className="hp-tech"><p>Tecnologias e equipamentos presentes no nosso repertório técnico</p><strong><span className="hp-tech-pair">Keyence <span>·</span> Cognex</span><span className="hp-tech-between">·</span><span className="hp-tech-pair">Videojet <span>·</span> Zebra</span></strong></div>
+    </div></section>
+    <section className="hp-section" id="implantacao"><div className="container">
+      <Heading label="05 / COMO TRABALHAMOS" title="Começar pelo processo. Implantar com validação." subtitle="Um escopo claro, construído e conferido com quem usa a solução." /><Steps items={implementation} />
+    </div></section>
+    <section className="hp-section hp-about" id="sobre"><div className="container hp-about-grid">
+      <Heading label="06 / SOBRE A D2 CODE" title="Experiência técnica próxima da operação." />
+      <div><p>A D2 Code é uma empresa de Atibaia especializada em software, integrações e evolução de sistemas para operações que dependem de informação correta no momento certo.</p><p>Trabalhamos conectando sistemas, equipamentos e regras do processo para criar soluções adequadas à realidade de cada operação.</p><div className="hp-about-labels"><span>ATIBAIA · SP</span><span>SOFTWARE SOB MEDIDA</span></div></div>
+    </div></section>
+    <section className="hp-section hp-contact" id="contato"><div className="container">
+      <Heading label="07 / VAMOS CONVERSAR" title="Onde sua operação ainda exige conferir ou digitar à mão?" subtitle="Vale conversar quando leituras, impressão ou registros dependem de conferências repetitivas — ou quando equipamentos e sistemas precisam trocar informações." />
+      <div className="hp-contact-grid"><div><p>Conte qual é o processo, quais equipamentos e sistemas estão envolvidos e onde aparece o erro, o retrabalho ou a intervenção manual. Na primeira conversa, buscamos entender o cenário e avaliar se faz sentido avançar para um escopo.</p><div className="hp-contact-prompts"><span>O PROCESSO</span><span>OS EQUIPAMENTOS E SISTEMAS</span><span>A DIFICULDADE</span></div></div><div className="hp-contact-actions"><WhatsApp>Falar pelo WhatsApp</WhatsApp><a className="hp-agenda" href={BOOKINGS} target="_blank" rel="noreferrer">Agendar uma conversa de 30 minutos <span aria-hidden="true">↗</span></a><address><strong>Diego Carvalho</strong><span>Fundador e responsável técnico</span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a><a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a></address></div></div>
+    </div></section>
+    <footer className="hp-footer"><div className="container"><div className="hp-footer-top"><a href="#inicio" aria-label="D2 Code — voltar ao início"><Logo /></a><p>D2 CODE SISTEMAS LTDA.<br />ATIBAIA — SP</p><div><a href="mailto:diego.carvalho@d2code.com.br">E-mail ↗</a><a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>WhatsApp ↗</a><a href="https://www.linkedin.com/company/d2code" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div><div className="hp-footer-bottom"><span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span><a href="/privacidade/">Privacidade</a><a href="#inicio">Voltar ao topo ↑</a></div></div></footer>
+  </main>;
 }
