@@ -1,6 +1,8 @@
 export type ClarityEventName =
   | "cta_conversa"
   | "whatsapp_contato"
+  | "bookings_contato"
+  | "email_contato"
   | "ver_servicos"
   | "card_atuacao"
   | "card_solucao"
@@ -13,8 +15,12 @@ declare global {
   }
 }
 
+export function isClarityProductionHost(hostname: string) {
+  return process.env.NODE_ENV === "production" && hostname === "d2code.com.br";
+}
+
 export function trackClarityEvent(eventName: ClarityEventName) {
-  if (process.env.NODE_ENV !== "production" || typeof window === "undefined") {
+  if (typeof window === "undefined" || !isClarityProductionHost(window.location.hostname)) {
     return;
   }
 

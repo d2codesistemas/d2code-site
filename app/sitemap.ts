@@ -6,7 +6,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     {
       url: "https://d2code.com.br/",
-      lastModified: new Date("2026-08-13"),
+      lastModified: new Date("2026-10-08"),
       changeFrequency: "monthly",
       priority: 1,
     },
