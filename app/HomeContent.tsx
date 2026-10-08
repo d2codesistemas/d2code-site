@@ -33,13 +33,13 @@ const demos = [
 ];
 
 function Logo() {
-  return <Image src="/d2code-logo.png" alt="D2 Code Sistemas" width={1024} height={1024} className="logo compact" unoptimized priority />;
+  return <Image src="/d2code-logo-home.webp" alt="D2 Code Sistemas" width={256} height={256} className="logo compact" unoptimized priority />;
 }
 function Heading({ label, title, subtitle }: { label: string; title: string; subtitle?: string }) {
   return <div className="hp-heading"><p className="hp-label">{label}</p><h2>{title}</h2>{subtitle && <p className="hp-subtitle">{subtitle}</p>}</div>;
 }
-function WhatsApp({ children, hero = false }: { children: React.ReactNode; hero?: boolean }) {
-  return <a className="hp-button" href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => { if (hero) trackClarityEvent("cta_conversa"); trackClarityEvent("whatsapp_contato"); }}>{children}<span aria-hidden="true">↗</span></a>;
+function WhatsApp({ children }: { children: React.ReactNode }) {
+  return <a className="hp-button" href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>{children}<span aria-hidden="true">↗</span></a>;
 }
 function Steps({ items }: { items: string[][] }) {
   return <ol className="hp-steps">{items.map(([title, text], index) => <li key={title}><span className="hp-number">0{index + 1}</span><h3>{title}</h3><p>{text}</p></li>)}</ol>;
@@ -54,7 +54,7 @@ export default function Home() {
       <a href="#inicio" aria-label="D2 Code — início" onClick={close}><Logo /></a>
       <button className="hp-menu" type="button" aria-label={menu ? "Fechar menu" : "Abrir menu"} aria-expanded={menu} aria-controls="menu-principal" onClick={() => setMenu(!menu)}><span /><span /></button>
       <nav id="menu-principal" className={menu ? "hp-open" : ""} aria-label="Navegação principal">
-        <a href="#aplicacoes" onClick={close}>Aplicações</a><a href="#experiencia" onClick={close}>Experiência</a><a href="#implantacao" onClick={close}>Implantação</a><a href="#sobre" onClick={close}>Sobre</a>
+        <a href="#aplicacoes" onClick={() => { trackClarityEvent("ver_servicos"); close(); }}>Aplicações</a><a href="#experiencia" onClick={close}>Experiência</a><a href="#implantacao" onClick={close}>Implantação</a><a href="#sobre" onClick={close}>Sobre</a>
         <a className="hp-nav-contact" href="#contato" onClick={() => { trackClarityEvent("cta_conversa"); close(); }}>Falar com a D2 ↗</a>
       </nav>
     </header>
@@ -63,7 +63,7 @@ export default function Home() {
         <div><p className="hp-label">INTEGRAÇÃO ENTRE EQUIPAMENTOS, PROCESSO E SISTEMAS</p>
           <h1>Menos conferência manual.<br /><span>Mais controle entre equipamento e sistemas.</span></h1>
           <p className="hp-lead">Conectamos equipamentos, regras do processo e sistemas para reduzir digitação, erros e retrabalho.</p>
-          <div className="hp-actions"><WhatsApp hero>Falar sobre minha operação</WhatsApp><a className="hp-text-link" href="#aplicacoes" onClick={() => trackClarityEvent("ver_servicos")}>Ver aplicações <span aria-hidden="true">↓</span></a></div>
+          <div className="hp-actions"><WhatsApp>Falar sobre minha operação</WhatsApp><a className="hp-text-link" href="#aplicacoes" onClick={() => trackClarityEvent("ver_servicos")}>Ver aplicações <span aria-hidden="true">↓</span></a></div>
         </div>
         <div className="hp-hero-diagram" aria-label="Equipamento conectado nos dois sentidos ao software D2 e suas regras, conectado ao ERP e sistemas">
           <p className="hp-diagram-label">ONDE A D2 ENTRA</p>
@@ -114,8 +114,8 @@ export default function Home() {
     </div></section>
     <section className="hp-section hp-contact" id="contato"><div className="container">
       <Heading label="07 / VAMOS CONVERSAR" title="Onde sua operação ainda exige conferir ou digitar à mão?" subtitle="Vale conversar quando leituras, impressão ou registros dependem de conferências repetitivas — ou quando equipamentos e sistemas precisam trocar informações." />
-      <div className="hp-contact-grid"><div><p>Conte qual é o processo, quais equipamentos e sistemas estão envolvidos e onde aparece o erro, o retrabalho ou a intervenção manual. Na primeira conversa, buscamos entender o cenário e avaliar se faz sentido avançar para um escopo.</p><div className="hp-contact-prompts"><span>O PROCESSO</span><span>OS EQUIPAMENTOS E SISTEMAS</span><span>A DIFICULDADE</span></div></div><div className="hp-contact-actions"><WhatsApp>Falar pelo WhatsApp</WhatsApp><a className="hp-agenda" href={BOOKINGS} target="_blank" rel="noreferrer">Agendar uma conversa de 30 minutos <span aria-hidden="true">↗</span></a><address><strong>Diego Carvalho</strong><span>Fundador e responsável técnico</span><a href="mailto:diego.carvalho@d2code.com.br">diego.carvalho@d2code.com.br</a><a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a></address></div></div>
+      <div className="hp-contact-grid"><div><p>Conte qual é o processo, quais equipamentos e sistemas estão envolvidos e onde aparece o erro, o retrabalho ou a intervenção manual. Na primeira conversa, buscamos entender o cenário e avaliar se faz sentido avançar para um escopo.</p><div className="hp-contact-prompts"><span>O PROCESSO</span><span>OS EQUIPAMENTOS E SISTEMAS</span><span>A DIFICULDADE</span></div></div><div className="hp-contact-actions"><WhatsApp>Falar pelo WhatsApp</WhatsApp><a className="hp-agenda" href={BOOKINGS} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("bookings_contato")}>Agendar uma conversa de 30 minutos <span aria-hidden="true">↗</span></a><address><strong>Diego Carvalho</strong><span>Fundador e responsável técnico</span><a href="mailto:diego.carvalho@d2code.com.br" onClick={() => trackClarityEvent("email_contato")}>diego.carvalho@d2code.com.br</a><a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>(11) 95026-3057</a></address></div></div>
     </div></section>
-    <footer className="hp-footer"><div className="container"><div className="hp-footer-top"><a href="#inicio" aria-label="D2 Code — voltar ao início"><Logo /></a><p>D2 CODE SISTEMAS LTDA.<br />ATIBAIA — SP</p><div><a href="mailto:diego.carvalho@d2code.com.br">E-mail ↗</a><a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>WhatsApp ↗</a><a href="https://www.linkedin.com/company/d2code" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div><div className="hp-footer-bottom"><span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span><a href="/privacidade/">Privacidade</a><a href="#inicio">Voltar ao topo ↑</a></div></div></footer>
+    <footer className="hp-footer"><div className="container"><div className="hp-footer-top"><a href="#inicio" aria-label="D2 Code — voltar ao início"><Logo /></a><p>D2 CODE SISTEMAS LTDA.<br />ATIBAIA — SP</p><div><a href="mailto:diego.carvalho@d2code.com.br" onClick={() => trackClarityEvent("email_contato")}>E-mail ↗</a><a href={WHATSAPP} target="_blank" rel="noreferrer" onClick={() => trackClarityEvent("whatsapp_contato")}>WhatsApp ↗</a><a href="https://www.linkedin.com/company/d2code" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div><div className="hp-footer-bottom"><span>© {new Date().getFullYear()} D2 CODE SISTEMAS LTDA.</span><a href="/privacidade/">Privacidade</a><a href="#inicio">Voltar ao topo ↑</a></div></div></footer>
   </main>;
 }

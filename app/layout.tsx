@@ -58,8 +58,8 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
-        {children}
         <AnalyticsConsent />
+        {children}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationData) }}

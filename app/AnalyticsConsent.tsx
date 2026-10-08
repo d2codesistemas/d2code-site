@@ -2,6 +2,7 @@
 
 import Script from "next/script";
 import { useEffect, useState } from "react";
+import { isClarityProductionHost } from "./clarity";
 
 type Consent = "accepted" | "declined" | null;
 
@@ -25,7 +26,7 @@ export default function AnalyticsConsent() {
 
   return (
     <>
-      {consent === "accepted" && (
+      {consent === "accepted" && isClarityProductionHost(window.location.hostname) && (
         <Script id="microsoft-clarity" strategy="afterInteractive">
           {`
             (function(c,l,a,r,i,t,y){
