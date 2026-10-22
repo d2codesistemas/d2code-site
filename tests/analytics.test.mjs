@@ -65,12 +65,12 @@ test('tracking is safe during SSR or when collector is absent/unavailable', () =
 
 test('actual home handlers distinguish contact channel and internal navigation', () => {
   const calls = [];
-  const component = load('HomeContent.tsx', { imports: {
+  const component = load('HomeRedesign.tsx', { imports: {
     react: { useState: initial => [initial, () => {}] },
     'react/jsx-runtime': runtime,
     'next/image': props => ({ type: 'img', props }),
     './clarity': { trackClarityEvent: name => calls.push(name) },
-    './home-preview.module.css': { preview: 'preview' },
+    './home-redesign.module.css': { preview: 'preview' },
   } });
   const links = flatten(component.default()).filter(e => e.type === 'a');
   for (const [match, expected, count] of [

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import HomeContent from "./HomeContent";
+import HomeContent from "./HomeRedesign";
 
 const title = "D2 Code | Software industrial e integração de equipamentos";
 const description =
