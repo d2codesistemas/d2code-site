@@ -66,15 +66,16 @@ test('tracking is safe during SSR or when collector is absent/unavailable', () =
 test('actual home handlers distinguish contact channel and internal navigation', () => {
   const calls = [];
   const component = load('HomeRedesign.tsx', { imports: {
-    react: { useState: initial => [initial, () => {}] },
+    react: { useState: initial => [initial, () => {}], useRef: () => ({current:null}), useEffect: () => {} },
     'react/jsx-runtime': runtime,
     'next/image': props => ({ type: 'img', props }),
     './clarity': { trackClarityEvent: name => calls.push(name) },
+    './heroRotation': { createHeroRotation: () => {} },
     './home-redesign.module.css': { preview: 'preview' },
   } });
   const links = flatten(component.default()).filter(e => e.type === 'a');
   for (const [match, expected, count] of [
-    [href => href.startsWith('https://wa.me/'), 'whatsapp_contato', 5],
+    [href => href.startsWith('https://wa.me/'), 'whatsapp_contato', 4],
     [href => href.startsWith('https://outlook.office.com/'), 'bookings_contato', 1],
     [href => href.startsWith('mailto:'), 'email_contato', 2],
     [href => href === '#aplicacoes', 'ver_servicos', 2],
